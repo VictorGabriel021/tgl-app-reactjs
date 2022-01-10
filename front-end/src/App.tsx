@@ -1,7 +1,9 @@
 import "./App.css";
+import "./core/assets/styles/custom.scss";
+import Routes from "./Routes";
 
-function App() {
-  return <div className="App"></div>;
-}
+const App = () => {
+  return <Routes />;
+};
 
 export default App;
