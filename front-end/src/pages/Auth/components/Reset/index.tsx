@@ -1,52 +1,39 @@
-import {
-  TextParagrath,
-  Form,
-  Input,
-  Label,
-  TextCenter,
-  ErrorMessage,
-} from "../styles";
+import { Form, Input, Label, TextCenter, ErrorMessage } from "../styles";
 import Card from "../../../../core/components/Card";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { saveUserData } from "../../../../store/userLoginSlice";
+import { useHistory } from "react-router-dom";
 import { AuthCard } from "../../../../core/assets/utils/types";
 import BtnSumbit from "../ButtonSubmit";
 
 interface IFormInput {
   email: string;
-  password: string;
 }
 
-const Login = ({ title, textButton, textRedirect }: AuthCard) => {
+const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const onSubmit = async (dataForm: IFormInput) => {
     try {
-      const response = await makeRequest({
-        url: "/login",
+      await makeRequest({
+        url: "/reset",
         method: "POST",
         data: dataForm,
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const data = await response.data;
-      dispatch(saveUserData(data));
-      history.push("/lottery");
+      history.push("/");
     } catch (error: any) {
       let errorMessage = "Network Error";
-      if (error.message === "Request failed with status code 401") {
-        errorMessage = "Email or password invalid !";
+      if (error.message === "Request failed with status code 404") {
+        errorMessage = "User not found !";
       }
       toast.error(errorMessage, {
         position: toast.POSITION.TOP_RIGHT,
@@ -58,8 +45,8 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
     <Card
       title={title}
       textRedirect={textRedirect}
-      arrowLeft={false}
-      urlRedirect="/auth/register"
+      arrowLeft={true}
+      urlRedirect="/"
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Label>Email</Label>
@@ -74,20 +61,6 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
             },
           })}
         />
-        <Label>Password</Label>
-        {errors.password && (
-          <ErrorMessage>{errors.password.message}</ErrorMessage>
-        )}
-        <Input
-          type="password"
-          {...register("password", {
-            required: "This field is required",
-            minLength: { value: 4, message: "Must be at least 4 characters" },
-          })}
-        />
-        <TextParagrath>
-          <Link to={"/auth/reset"}>I forget my password</Link>
-        </TextParagrath>
         <TextCenter>
           <BtnSumbit textButton={textButton} />
         </TextCenter>
@@ -96,4 +69,4 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
   );
 };
 
-export default Login;
+export default Reset;

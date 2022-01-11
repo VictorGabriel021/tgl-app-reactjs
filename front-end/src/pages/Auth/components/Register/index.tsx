@@ -54,7 +54,7 @@ const Register = ({ title, textButton, textRedirect }: AuthCard) => {
   };
 
   return (
-    <Card title={title} textRedirect={textRedirect} arrowLeft={true} url="/">
+    <Card title={title} textRedirect={textRedirect} arrowLeft={true} urlRedirect="/">
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Label>Name</Label>
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}

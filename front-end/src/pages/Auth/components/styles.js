@@ -42,6 +42,7 @@ export const ButtonSubmit = styled.button`
   font-weight: bold;
   background-color: #fff;
   border: none;
+  font-style: italic;
 
   &:hover {
     color: #98a312;

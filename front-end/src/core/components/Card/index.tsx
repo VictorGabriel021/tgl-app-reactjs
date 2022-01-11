@@ -8,16 +8,16 @@ type Props = {
   title: string;
   textRedirect: string;
   arrowLeft: boolean;
-  url: string;
+  urlRedirect: string;
 };
 
-const Card = ({ children, title, textRedirect, arrowLeft, url }: Props) => {
+const Card = ({ children, title, textRedirect, arrowLeft, urlRedirect }: Props) => {
   return (
     <>
       <TextMain>{title}</TextMain>
       <CardContainer>{children}</CardContainer>
       <TextRedirect>
-        <Link to={url}>
+        <Link to={urlRedirect}>
           {arrowLeft && <HiOutlineArrowLeft />}
           {textRedirect} {!arrowLeft && <HiOutlineArrowRight />}
         </Link>

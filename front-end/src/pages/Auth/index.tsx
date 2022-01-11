@@ -10,6 +10,7 @@ import {
 } from "./styles";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Reset from "./components/Reset";
 
 const Auth = () => {
   return (
@@ -34,8 +35,12 @@ const Auth = () => {
                 textRedirect="Sign Up"
               />
             </Route>
-            <Route path="/auth/recover" exact>
-              recover
+            <Route path="/auth/reset" exact>
+              <Reset
+                title="Reset password"
+                textButton="Send link"
+                textRedirect="Back"
+              />
             </Route>
             <Route path="/auth/register" exact>
               <Register
