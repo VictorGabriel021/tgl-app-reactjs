@@ -1,12 +1,28 @@
 import React from "react";
-import { Card } from "./styles";
+import { TextSubtitle, CardContainer } from "./styles";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
+  title: string;
+  textRedirect: string;
+  arrowLeft: boolean;
+  url: string;
 };
 
-const Login = ({ children }: Props) => {
-  return <Card>{children}</Card>;
+const Card = ({ children, title, textRedirect, arrowLeft, url }: Props) => {
+  return (
+    <>
+      <TextSubtitle>{title}</TextSubtitle>
+      <CardContainer>{children}</CardContainer>
+      <TextSubtitle>
+        <Link to={url}>
+          {arrowLeft && <HiOutlineArrowLeft />}
+          {textRedirect} {!arrowLeft && <HiOutlineArrowRight />}
+        </Link>
+      </TextSubtitle>
+    </>
+  );
 };
-
-export default Login;
+export default Card;

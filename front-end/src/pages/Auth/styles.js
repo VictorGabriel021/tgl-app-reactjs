@@ -37,6 +37,11 @@ export const Button = styled.button`
   border-radius: 50px;
   width: 150px;
   margin: 25px 0;
+
+  &:hover {
+    background-color: #98a312;
+    color: #fff;
+  }
 `;
 
 export const Subtitle = styled.h2`

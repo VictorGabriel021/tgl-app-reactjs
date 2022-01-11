@@ -19,26 +19,36 @@ export const Input = styled.input`
   }
 `;
 
-export const TextSubtitle = styled.h2`
-  font-size: 42px;
-  font-weight: bold;
-  text-align: center;
-  @media (max-width: 500px) {
-    font-size: 32px;
-    margin-top: 20px;
-  }
-`;
-
 export const TextParagrath = styled.p`
   color: #c1c1c1;
   text-align: end;
   margin-top: 20px;
+  a {
+    text-decoration: none;
+    color: unset;
+  }
+  &:hover {
+    color: #a19c9c;
+  }
 `;
 
-export const ButtonSubmit = styled.p`
+export const TextCenter = styled.div`
+  text-align: center;
+`;
+
+export const ButtonSubmit = styled.button`
   color: #b5c401;
   font-size: 35px;
   font-weight: bold;
-  text-align: center;
-  margin-top: 40px;
+  background-color: #fff;
+  border: none;
+
+  &:hover {
+    color: #98a312;
+  }
+`;
+
+export const ErrorMessage = styled.span`
+  color: #ff5757;
+  margin-left: 10px;
 `;
