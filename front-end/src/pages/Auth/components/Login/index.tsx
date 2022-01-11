@@ -1,33 +1,27 @@
 import {
   TextParagrath,
-  ButtonSubmit,
   Form,
   Input,
   Label,
   TextCenter,
   ErrorMessage,
-} from "./styles";
-import { HiOutlineArrowRight } from "react-icons/hi";
-import Card from "../../../core/components/Card";
+} from "../styles";
+import Card from "../../../../core/components/Card";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { makeRequest } from "../../../core/assets/utils/request";
+import { makeRequest } from "../../../../core/assets/utils/request";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { saveUserData } from "../../../store/userLoginSlice";
-
-type Props = {
-  title: string;
-  textButton: string;
-  textRedirect: string;
-};
+import { saveUserData } from "../../../../store/userLoginSlice";
+import { AuthCard } from "../../../../core/assets/utils/types";
+import BtnSumbit from "../ButtonSubmit";
 
 interface IFormInput {
   email: string;
   password: string;
 }
 
-const Login = ({ title, textButton, textRedirect }: Props) => {
+const Login = ({ title, textButton, textRedirect }: AuthCard) => {
   const {
     register,
     handleSubmit,
@@ -86,15 +80,16 @@ const Login = ({ title, textButton, textRedirect }: Props) => {
         )}
         <Input
           type="password"
-          {...register("password", { required: "This field is required" })}
+          {...register("password", {
+            required: "This field is required",
+            minLength: { value: 4, message: "Must be at least 4 characters" },
+          })}
         />
         <TextParagrath>
           <Link to={"/auth/reset"}>I forget my password</Link>
         </TextParagrath>
         <TextCenter>
-          <ButtonSubmit>
-            {textButton} <HiOutlineArrowRight />
-          </ButtonSubmit>
+          <BtnSumbit textButton={textButton} />
         </TextCenter>
       </Form>
     </Card>

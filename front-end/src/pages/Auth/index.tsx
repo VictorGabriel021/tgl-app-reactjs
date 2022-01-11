@@ -8,7 +8,8 @@ import {
   TextCenter,
   Content,
 } from "./styles";
-import Login from "./Login";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 const Auth = () => {
   return (
@@ -37,7 +38,11 @@ const Auth = () => {
               recover
             </Route>
             <Route path="/auth/register" exact>
-              register
+              <Register
+                title="Registration"
+                textButton="Register"
+                textRedirect="Back"
+              />
             </Route>
           </Switch>
         </Div>

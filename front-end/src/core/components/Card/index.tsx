@@ -1,5 +1,5 @@
 import React from "react";
-import { TextSubtitle, CardContainer } from "./styles";
+import { TextMain, TextRedirect, CardContainer } from "./styles";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
@@ -14,14 +14,14 @@ type Props = {
 const Card = ({ children, title, textRedirect, arrowLeft, url }: Props) => {
   return (
     <>
-      <TextSubtitle>{title}</TextSubtitle>
+      <TextMain>{title}</TextMain>
       <CardContainer>{children}</CardContainer>
-      <TextSubtitle>
+      <TextRedirect>
         <Link to={url}>
           {arrowLeft && <HiOutlineArrowLeft />}
           {textRedirect} {!arrowLeft && <HiOutlineArrowRight />}
         </Link>
-      </TextSubtitle>
+      </TextRedirect>
     </>
   );
 };

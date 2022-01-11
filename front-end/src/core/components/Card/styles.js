@@ -9,19 +9,22 @@ export const CardContainer = styled.div`
   margin: 30px 0;
 `;
 
-export const TextSubtitle = styled.h2`
+export const TextMain = styled.h2`
   font-size: 42px;
   font-weight: bold;
   text-align: center;
+  @media (max-width: 500px) {
+    font-size: 32px;
+    margin-top: 20px;
+  }
+`;
+
+export const TextRedirect = styled(TextMain)`
   a {
     text-decoration: none;
     color: unset;
   }
   &:hover {
     color: #504e4e;
-  }
-  @media (max-width: 500px) {
-    font-size: 32px;
-    margin-top: 20px;
   }
 `;
