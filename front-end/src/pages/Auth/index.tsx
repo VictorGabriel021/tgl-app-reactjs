@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Link, Redirect, Route, Switch } from "react-router-dom";
 import {
   Container,
   Div,
@@ -22,7 +22,9 @@ const Auth = () => {
             Greatest <br />
             App
           </Title>
-          <Button className="btn btn-button">for</Button>
+          <Link to="/">
+            <Button className="btn btn-button">for</Button>
+          </Link>
           <Subtitle>lottery</Subtitle>
         </TextCenter>
         <Div className="col-12 col-lg-6">
