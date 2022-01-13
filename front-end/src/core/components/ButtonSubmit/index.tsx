@@ -1,13 +1,14 @@
 import { HiOutlineArrowRight } from "react-icons/hi";
-import { ButtonSubmit } from "../styles";
+import { ButtonSubmit } from "./styles";
 
 type Props = {
   textButton: string;
+  className?: string;
 };
 
-const BtnSumbit = ({ textButton }: Props) => {
+const BtnSumbit = ({ className, textButton }: Props) => {
   return (
-    <ButtonSubmit>
+    <ButtonSubmit className={className}>
       {textButton} <HiOutlineArrowRight />
     </ButtonSubmit>
   );

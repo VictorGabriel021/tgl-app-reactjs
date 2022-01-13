@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
-import { AuthCard } from "../../../../core/assets/utils/types";
+import { AuthCard } from "../../../../core/assets/types/types";
 import Card from "../../../../core/components/Card";
 import { saveUserData } from "../../../../store/userLoginSlice";
-import BtnSumbit from "../ButtonSubmit";
+import BtnSumbit from "../../../../core/components/ButtonSubmit";
 import { ErrorMessage, Form, Input, Label, TextCenter } from "../styles";
 
 interface IFormInput {

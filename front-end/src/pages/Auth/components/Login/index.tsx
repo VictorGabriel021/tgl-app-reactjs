@@ -13,8 +13,8 @@ import { makeRequest } from "../../../../core/assets/utils/request";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUserData } from "../../../../store/userLoginSlice";
-import { AuthCard } from "../../../../core/assets/utils/types";
-import BtnSumbit from "../ButtonSubmit";
+import { AuthCard } from "../../../../core/assets/types/types";
+import BtnSumbit from "../../../../core/components/ButtonSubmit";
 
 interface IFormInput {
   email: string;

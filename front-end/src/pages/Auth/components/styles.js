@@ -36,19 +36,6 @@ export const TextCenter = styled.div`
   text-align: center;
 `;
 
-export const ButtonSubmit = styled.button`
-  color: #b5c401;
-  font-size: 35px;
-  font-weight: bold;
-  background-color: #fff;
-  border: none;
-  font-style: italic;
-
-  &:hover {
-    color: #98a312;
-  }
-`;
-
 export const ErrorMessage = styled.span`
   color: #ff5757;
   margin-left: 10px;
