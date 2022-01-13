@@ -6,6 +6,7 @@ export const Container = styled.div`
 
 export const LotteryTitle = styled.h1`
   font-size: 24px;
+  text-transform: Uppercase;
 `;
 
 export const LotteryParagraph = styled.p`
@@ -32,7 +33,7 @@ const Btn = styled.button`
 `;
 
 export const DescriptionGame = styled.p`
-  line-height: 0;
+  margin-top: -10px;
 `;
 
 export const BtnAction = styled(Btn)`
@@ -54,19 +55,4 @@ export const LotteryChooiceNumber = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 35px 0 10px 0;
-`;
-
-export const ChooiceNumber = styled.p`
-  background-color: #adc0c4;
-  padding: 20px;
-  border-radius: 100%;
-  color: #fff;
-  font-weight: bold;
-  font-size: 20px;
-  margin: 0 12px 20px 0;
-  text-align: center;
-
-  @media (max-width: 600px) {
-    padding: 10px;
-  }
 `;

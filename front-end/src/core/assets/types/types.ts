@@ -6,17 +6,17 @@ export type AuthCard = {
 
 export type GameFilter = {
   min_cart_value: number;
-  types: [
-    {
-      id: number;
-      type: string;
-      description: string;
-      range: number;
-      price: number;
-      max_number: number;
-      color: string;
-    }
-  ] | [];
+  types: GameInfo[] | [];
+};
+
+export type GameInfo = {
+  id: number;
+  type: string;
+  description: string;
+  range: number;
+  price: number;
+  max_number: number;
+  color: string;
 };
 
 export type GamesList = {

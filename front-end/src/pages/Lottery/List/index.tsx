@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
-import { GamesList } from "../../../core/assets/types/types";
+import { GameFilter, GamesList } from "../../../core/assets/types/types";
 import { makeRequest } from "../../../core/assets/utils/request";
 import BtnSumbit from "../../../core/components/ButtonSubmit";
 import GamesFilter from "../GamesFilter";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { UserLoginState } from "../../../store/store";
+import { RootState } from "../../../store/store";
 
 import {
   Container,
@@ -17,11 +17,17 @@ import {
 } from "./styles";
 import LotteryItem from "./Item";
 import { Link } from "react-router-dom";
+import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
 
 const LotteryList = () => {
   const [gamesList, setGamesList] = useState<GamesList[]>([]);
+  const [gameFilter, setGameFilter] = useState<GameFilter>({
+    min_cart_value: 0,
+    types: [],
+  });
+
   const [filter, setFilter] = useState<string[]>([]);
-  const userLogin: any = useSelector<UserLoginState>(
+  const userLogin: any = useSelector<RootState>(
     (state) => state.userLogin.token
   );
 
@@ -55,8 +61,14 @@ const LotteryList = () => {
     [userLogin.token]
   );
 
+  async function fetchData() {
+    const response = await getFilterGames();
+    setGameFilter(response);
+  }
+
   useEffect(() => {
     getGameList();
+    fetchData();
   }, [getGameList]);
 
   const onUpdateGameListHandler = (type: string) => {
@@ -88,6 +100,7 @@ const LotteryList = () => {
               <GamesFilter
                 onUpdateFilter={onUpdateGameListHandler}
                 filter={filter}
+                gamesList={gameFilter.types}
               />
             </Filters>
             <Link to={"/lottery/games"}>

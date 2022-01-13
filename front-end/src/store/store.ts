@@ -5,4 +5,4 @@ export const store = configureStore({
   reducer: { userLogin: userLoginReducer },
 });
 
-export type UserLoginState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
