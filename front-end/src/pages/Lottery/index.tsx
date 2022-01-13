@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+import LotteryGames from "./Games";
 import LotteryList from "./List";
 
 const Lottery = () => {
@@ -9,7 +10,7 @@ const Lottery = () => {
         <LotteryList />
       </Route>
       <Route path="/lottery/games" exact>
-        <p>GamesFilter</p>
+        <LotteryGames />
       </Route>
     </Switch>
   );

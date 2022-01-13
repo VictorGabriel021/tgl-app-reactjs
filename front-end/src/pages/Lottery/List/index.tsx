@@ -16,6 +16,7 @@ import {
   FiltersMain,
 } from "./styles";
 import LotteryItem from "./Item";
+import { Link } from "react-router-dom";
 
 const LotteryList = () => {
   const [gamesList, setGamesList] = useState<GamesList[]>([]);
@@ -89,10 +90,12 @@ const LotteryList = () => {
                 filter={filter}
               />
             </Filters>
-            <BtnSumbit
-              className="fs-5 p-0 d-none d-sm-inline"
-              textButton="New Bet"
-            />
+            <Link to={"/lottery/games"}>
+              <BtnSumbit
+                className="fs-5 p-0 d-none d-sm-inline"
+                textButton="New Bet"
+              />
+            </Link>
           </FiltersMain>
           {gamesList.map((game) => {
             return (

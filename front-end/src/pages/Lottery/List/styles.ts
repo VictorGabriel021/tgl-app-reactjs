@@ -38,6 +38,10 @@ export const Filters = styled.div`
 `;
 
 export const FiltersMain = styled(Filters)`
+  a {
+    text-decoration: none;
+  }
+  
   @media (max-width: 850px) {
     padding: 10px 15px 0 15px;
   }
