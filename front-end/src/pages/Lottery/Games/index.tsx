@@ -15,8 +15,11 @@ import GamesCard from "./Card";
 import { GameFilter, GameInfo } from "../../../core/assets/types/types";
 import GenerateNumbers from "./Numbers";
 import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearGame, completeGame, getGameId } from "../../../store/betSlice";
+import { addToCart } from "../../../store/cartSlice";
+import { RootState } from "../../../store/store";
+import { isEqualBet } from "../../../core/assets/utils/bet";
 
 const LotteryGames = () => {
   const [filter, setFilter] = useState<number[]>([]);
@@ -33,6 +36,10 @@ const LotteryGames = () => {
     min_cart_value: 0,
     types: [],
   });
+
+  const betItem = useSelector<RootState>((state) => state.bet);
+  const betItemNumbers = useSelector<RootState>((state) => state.bet.numbers);
+  const betList = useSelector<RootState>((state) => state.cart.games);
   const dispatch = useDispatch();
 
   const fetchData = useCallback(async () => {
@@ -53,6 +60,24 @@ const LotteryGames = () => {
 
   const clearGameHandler = () => {
     dispatch(clearGame());
+  };
+
+  const addToCartHandler = () => {
+    const isEqual = isEqualBet(betList, betItem);
+    const maxNumbers = selectedGame.max_number;
+
+    let newBetItemNumbers = betItemNumbers as number[];
+    const betNumbers = newBetItemNumbers.length;
+
+    if (isEqual) {
+      window.alert("Não é possível adicionar o mesmo jogo de loteria");
+    } else if (betNumbers < maxNumbers) {
+      const num = maxNumbers - betNumbers;
+      window.alert(`É necessário selecionar mais ${num} números`);
+    } else {
+      dispatch(addToCart({ betItem, selectedGame }));
+      clearGameHandler();
+    }
   };
 
   const onUpdateGameListHandler = (game: GameInfo) => {
@@ -98,7 +123,7 @@ const LotteryGames = () => {
               </BtnAction>
               <BtnAction onClick={clearGameHandler}>Clear game</BtnAction>
             </div>
-            <BtnAddToCart>
+            <BtnAddToCart onClick={addToCartHandler}>
               <BsCart3 />
               Add to cart
             </BtnAddToCart>

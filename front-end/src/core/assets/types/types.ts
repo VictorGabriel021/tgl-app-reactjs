@@ -31,3 +31,8 @@ export type GamesList = {
     type: string;
   };
 };
+
+export type Bet = {
+  game_id: number;
+  numbers: number[];
+};

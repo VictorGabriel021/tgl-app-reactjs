@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type Bet = {
-  game_id: number;
-  numbers: number[];
-};
+import { Bet } from "../core/assets/types/types";
 
 const initialStateLogin: Bet = {
   game_id: 0,
