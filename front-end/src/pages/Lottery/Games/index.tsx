@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GamesFilter from "../GamesFilter";
 import { BsCart3 } from "react-icons/bs";
 import {
@@ -15,9 +15,11 @@ import GamesCard from "./Card";
 import { GameFilter, GameInfo } from "../../../core/assets/types/types";
 import GenerateNumbers from "./Numbers";
 import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
+import { useDispatch } from "react-redux";
+import { clearGame, completeGame, getGameId } from "../../../store/betSlice";
 
 const LotteryGames = () => {
-  const [filter, setFilter] = useState<string[]>([]);
+  const [filter, setFilter] = useState<number[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameInfo>({
     id: 0,
     type: "",
@@ -31,23 +33,35 @@ const LotteryGames = () => {
     min_cart_value: 0,
     types: [],
   });
+  const dispatch = useDispatch();
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     const response = await getFilterGames();
     setGamesList(response);
     setSelectedGame(response.types[0]);
-    setFilter([response.types[0].type]);
-  }
+    setFilter([response.types[0].id]);
+    dispatch(getGameId(response.types[0].id));
+  }, [dispatch]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
-  const onUpdateGameListHandler = (type: string) => {
-    setFilter([type]);
-    const index = gamesList.types.findIndex((item: any) => item.type === type);
-    if (selectedGame.type !== type) {
+  const completeGameHandler = (item: {}) => {
+    dispatch(completeGame(item));
+  };
+
+  const clearGameHandler = () => {
+    dispatch(clearGame());
+  };
+
+  const onUpdateGameListHandler = (game: GameInfo) => {
+    clearGameHandler();
+    setFilter([game.id]);
+    const index = gamesList.types.findIndex((item: any) => item.id === game.id);
+    if (selectedGame.id !== game.id) {
       setSelectedGame(gamesList.types[index]);
+      dispatch(getGameId(game.id));
     }
   };
 
@@ -67,12 +81,22 @@ const LotteryGames = () => {
           <LotteryParagraph>Fill your bet</LotteryParagraph>
           <DescriptionGame>{selectedGame.description}</DescriptionGame>
           <LotteryChooiceNumber>
-            <GenerateNumbers numbers={selectedGame.range} />
+            <GenerateNumbers
+              numbers={selectedGame.range}
+              maxNumbers={selectedGame.max_number}
+            />
           </LotteryChooiceNumber>
           <BtnContainer>
             <div>
-              <BtnAction>Complete game</BtnAction>
-              <BtnAction>Clear game</BtnAction>
+              <BtnAction
+                onClick={completeGameHandler.bind(null, {
+                  range: selectedGame.range,
+                  max_number: selectedGame.max_number,
+                })}
+              >
+                Complete game
+              </BtnAction>
+              <BtnAction onClick={clearGameHandler}>Clear game</BtnAction>
             </div>
             <BtnAddToCart>
               <BsCart3 />

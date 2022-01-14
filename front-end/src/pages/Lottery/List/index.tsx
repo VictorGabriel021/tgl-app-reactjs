@@ -1,5 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
-import { GameFilter, GamesList } from "../../../core/assets/types/types";
+import {
+  GameFilter,
+  GameInfo,
+  GamesList,
+} from "../../../core/assets/types/types";
 import { makeRequest } from "../../../core/assets/utils/request";
 import BtnSumbit from "../../../core/components/ButtonSubmit";
 import GamesFilter from "../GamesFilter";
@@ -26,7 +30,8 @@ const LotteryList = () => {
     types: [],
   });
 
-  const [filter, setFilter] = useState<string[]>([]);
+  const [params, setParams] = useState<string[]>([]);
+  const [filter, setFilter] = useState<number[]>([]);
   const userLogin: any = useSelector<RootState>(
     (state) => state.userLogin.token
   );
@@ -71,19 +76,29 @@ const LotteryList = () => {
     fetchData();
   }, [getGameList]);
 
-  const onUpdateGameListHandler = (type: string) => {
+  const onUpdateGameListHandler = (game: GameInfo) => {
     let types: string[];
-    if (filter.includes(type)) {
-      setFilter((prev) => {
-        types = prev.filter((item) => item !== type);
+    let ids: number[];
+
+    if (params.includes(game.type)) {
+      setParams((prev) => {
+        types = prev.filter((item) => item !== game.type);
         getGameList(types);
         return types;
       });
-    } else {
       setFilter((prev) => {
-        types = [...prev, type];
+        ids = prev.filter((item) => item !== game.id);
+        return ids;
+      });
+    } else {
+      setParams((prev) => {
+        types = [...prev, game.type];
         getGameList(types);
         return types;
+      });
+      setFilter((prev) => {
+        ids = [...prev, game.id];
+        return ids;
       });
     }
   };

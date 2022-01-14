@@ -9,6 +9,12 @@ export const ChooiceNumber = styled.p`
   font-size: 20px;
   margin: 0 12px 20px 0;
   text-align: center;
+  cursor: pointer;
+
+  &.active,
+  &:hover {
+    background-color: #27C383;
+  }
 
   @media (max-width: 600px) {
     padding: 10px;

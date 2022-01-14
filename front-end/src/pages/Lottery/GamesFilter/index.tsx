@@ -2,14 +2,14 @@ import { GameInfo } from "../../../core/assets/types/types";
 import { ButtonGames } from "./styles";
 
 type Props = {
-  onUpdateFilter(type: string): void;
-  filter: string[];
+  onUpdateFilter(game: GameInfo): void;
+  filter: number[];
   gamesList: GameInfo[];
 };
 
 const GamesFilter = ({ onUpdateFilter, filter, gamesList }: Props) => {
-  const addToFilterhandler = (type: string) => {
-    onUpdateFilter(type);
+  const addToFilterhandler = (game: GameInfo) => {
+    onUpdateFilter(game);
   };
 
   return (
@@ -19,8 +19,8 @@ const GamesFilter = ({ onUpdateFilter, filter, gamesList }: Props) => {
           <ButtonGames
             key={game.id}
             color={game.color}
-            className={`${filter.includes(game.type) && "active"}`}
-            onClick={addToFilterhandler.bind(null, game.type)}
+            className={`${filter.includes(game.id) && "active"}`}
+            onClick={addToFilterhandler.bind(null, game)}
           >
             {game.type}
           </ButtonGames>
