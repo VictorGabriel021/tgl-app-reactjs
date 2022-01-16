@@ -4,6 +4,7 @@ export const CartTitleParagraph = styled.h3`
   font-size: 24px;
   text-transform: uppercase;
   font-weight: bold;
+  padding-top: 25px;
 `;
 
 export const TotalParagraph = styled.span`
@@ -40,5 +41,4 @@ export const CardScroll = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   margin-bottom: 20px;
-  padding: 40px 0;
 `;

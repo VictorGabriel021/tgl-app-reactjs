@@ -133,6 +133,7 @@ const LotteryList = () => {
                 gameDate={game.created_at}
                 gameType={game.type.type}
                 price={game.price}
+                color={gameFilter.types[(game.type.id - 1)].color}
               />
             );
           })}

@@ -19,9 +19,13 @@ export const cartSlice = createSlice({
       state.games.push(action.payload.betItem);
       state.totalCart += action.payload.selectedGame.price;
     },
+    removeToCart: (state, action) => {
+      state.games.splice(action.payload.id, 1);
+      state.totalCart -= action.payload.price;
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

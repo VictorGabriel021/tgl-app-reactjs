@@ -1,27 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
 import GamesFilter from "../GamesFilter";
-import { BsCart3 } from "react-icons/bs";
 import {
   Container,
   LotteryTitle,
   LotteryParagraph,
-  BtnAction,
-  BtnAddToCart,
   LotteryChooiceNumber,
-  BtnContainer,
   DescriptionGame,
 } from "./styles";
 import GamesCard from "./Card";
 import { GameFilter, GameInfo } from "../../../core/assets/types/types";
 import GenerateNumbers from "./Numbers";
 import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
-import { useDispatch, useSelector } from "react-redux";
-import { clearGame, completeGame, getGameId } from "../../../store/betSlice";
-import { addToCart } from "../../../store/cartSlice";
-import { RootState } from "../../../store/store";
-import { isEqualBet } from "../../../core/assets/utils/bet";
+import { useDispatch } from "react-redux";
+import { clearGame, getGameId } from "../../../store/betSlice";
+import ActionsButtons from "./ActionsButtons";
 
 const LotteryGames = () => {
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState<number[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameInfo>({
     id: 0,
@@ -37,11 +32,6 @@ const LotteryGames = () => {
     types: [],
   });
 
-  const betItem = useSelector<RootState>((state) => state.bet);
-  const betItemNumbers = useSelector<RootState>((state) => state.bet.numbers);
-  const betList = useSelector<RootState>((state) => state.cart.games);
-  const dispatch = useDispatch();
-
   const fetchData = useCallback(async () => {
     const response = await getFilterGames();
     setGamesList(response);
@@ -54,34 +44,8 @@ const LotteryGames = () => {
     fetchData();
   }, [fetchData]);
 
-  const completeGameHandler = (item: {}) => {
-    dispatch(completeGame(item));
-  };
-
-  const clearGameHandler = () => {
-    dispatch(clearGame());
-  };
-
-  const addToCartHandler = () => {
-    const isEqual = isEqualBet(betList, betItem);
-    const maxNumbers = selectedGame.max_number;
-
-    let newBetItemNumbers = betItemNumbers as number[];
-    const betNumbers = newBetItemNumbers.length;
-
-    if (isEqual) {
-      window.alert("Não é possível adicionar o mesmo jogo de loteria");
-    } else if (betNumbers < maxNumbers) {
-      const num = maxNumbers - betNumbers;
-      window.alert(`É necessário selecionar mais ${num} números`);
-    } else {
-      dispatch(addToCart({ betItem, selectedGame }));
-      clearGameHandler();
-    }
-  };
-
   const onUpdateGameListHandler = (game: GameInfo) => {
-    clearGameHandler();
+    dispatch(clearGame());
     setFilter([game.id]);
     const index = gamesList.types.findIndex((item: any) => item.id === game.id);
     if (selectedGame.id !== game.id) {
@@ -111,26 +75,10 @@ const LotteryGames = () => {
               maxNumbers={selectedGame.max_number}
             />
           </LotteryChooiceNumber>
-          <BtnContainer>
-            <div>
-              <BtnAction
-                onClick={completeGameHandler.bind(null, {
-                  range: selectedGame.range,
-                  max_number: selectedGame.max_number,
-                })}
-              >
-                Complete game
-              </BtnAction>
-              <BtnAction onClick={clearGameHandler}>Clear game</BtnAction>
-            </div>
-            <BtnAddToCart onClick={addToCartHandler}>
-              <BsCart3 />
-              Add to cart
-            </BtnAddToCart>
-          </BtnContainer>
+          <ActionsButtons selectedGame={selectedGame} />
         </div>
         <div className="col-12 col-lg-4">
-          <GamesCard />
+          <GamesCard gamesList={gamesList} />
         </div>
       </div>
     </Container>

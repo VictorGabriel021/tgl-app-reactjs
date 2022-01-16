@@ -1,25 +1,41 @@
-import { ItemContent, TextParagraph, TextParagraphBold } from "./styles";
+import { dateBrazil } from "../../../../core/assets/utils/date";
+import { priceReal } from "../../../../core/assets/utils/price";
+import {
+  ColorGame,
+  ItemContent,
+  TextParagraph,
+  TextParagraphBold,
+} from "../../styles";
 
 type Props = {
   choosen_numbers: string;
   gameDate: string;
   gameType: string;
   price: number;
+  color: string;
 };
 
-const LotteryItem = ({ choosen_numbers, gameDate, gameType, price }: Props) => {
-  const priceInReal = price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-  const date = new Date(gameDate);  
-  let dateBrazil = date.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
-  
+const LotteryItem = ({
+  choosen_numbers,
+  gameDate,
+  gameType,
+  price,
+  color,
+}: Props) => {
+  const priceInReal = priceReal(price);
+  let date: any = new Date(gameDate);
+  date = dateBrazil(date);
+
   return (
-    <ItemContent>
-      <TextParagraphBold>{choosen_numbers}</TextParagraphBold>
-      <TextParagraph>
-        {dateBrazil} - ({priceInReal})
-      </TextParagraph>
-      <p>{gameType}</p>
-    </ItemContent>
+    <div className="d-flex align-items-center">
+      <ItemContent color={color}>
+        <TextParagraphBold>{choosen_numbers}</TextParagraphBold>
+        <TextParagraph>
+          {date} - ({priceInReal})
+        </TextParagraph>
+        <ColorGame color={color}>{gameType}</ColorGame>
+      </ItemContent>
+    </div>
   );
 };
 

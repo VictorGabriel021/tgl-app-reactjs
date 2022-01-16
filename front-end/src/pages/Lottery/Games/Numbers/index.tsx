@@ -9,10 +9,7 @@ type Props = {
 };
 
 const GenerateNumbers = ({ numbers, maxNumbers }: Props) => {
-  const numbersGame = useSelector<RootState>(
-    (state) => state.bet.numbers
-  ) as number[];
-
+  const numbersGame = useSelector((state: RootState) => state.bet.numbers);
   const dispatch = useDispatch();
   let value = 1;
   let num: any[] = [];
@@ -22,7 +19,7 @@ const GenerateNumbers = ({ numbers, maxNumbers }: Props) => {
     value++;
   }
 
-  const onClickHandler = (item: {}) => {
+  const addNumberInListHandler = (item: {}) => {
     dispatch(addNumberInList(item));
   };
 
@@ -38,7 +35,7 @@ const GenerateNumbers = ({ numbers, maxNumbers }: Props) => {
             key={item}
             id={item}
             className={`${numbersGame.includes(item) && "active"}`}
-            onClick={onClickHandler.bind(null, {
+            onClick={addNumberInListHandler.bind(null, {
               item: item,
               maxNumbers: maxNumbers,
             })}
