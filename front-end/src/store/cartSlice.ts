@@ -23,9 +23,13 @@ export const cartSlice = createSlice({
       state.games.splice(action.payload.id, 1);
       state.totalCart -= action.payload.price;
     },
+    clearCart: (state) => {
+      state.games = [];
+      state.totalCart = 0;
+    },
   },
 });
 
-export const { addToCart, removeToCart } = cartSlice.actions;
+export const { addToCart, removeToCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

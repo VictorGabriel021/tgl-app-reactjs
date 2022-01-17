@@ -1,26 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type UserLogin = {
-  user:
-    | {
-        id: number;
-        email: string;
-        is_admin: number;
-        name: string;
-        token: string;
-        token_created_at: string;
-        created_at: string;
-        updated_at: string;
-        picture: string;
-      }
-    | object;
-  token:
-    | {
-        type: string;
-        token: string;
-        expires_at: string;
-      }
-    | object;
+  user: {
+    id: number;
+    email: string;
+    is_admin: number;
+    name: string;
+    token: string;
+    token_created_at: string;
+    created_at: string;
+    updated_at: string;
+    picture: string;
+  };
+  token: {
+    type: string;
+    token: string;
+    expires_at: string;
+  };
 };
 
 let userAuthenticated: any = localStorage.getItem("login") || "{}";

@@ -14,6 +14,7 @@ import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames
 import { useDispatch } from "react-redux";
 import { clearGame, getGameId } from "../../../store/betSlice";
 import ActionsButtons from "./ActionsButtons";
+import { clearCart } from "../../../store/cartSlice";
 
 const LotteryGames = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,8 @@ const LotteryGames = () => {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+    dispatch(clearCart());
+  }, [fetchData, dispatch]);
 
   const onUpdateGameListHandler = (game: GameInfo) => {
     dispatch(clearGame());
