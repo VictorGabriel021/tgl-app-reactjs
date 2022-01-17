@@ -3,7 +3,7 @@ import {
   GameFilter,
   GameInfo,
   GamesList,
-} from "../../../core/assets/types/types";
+} from "../../../core/assets/interfaces/interfaces";
 import { makeRequest } from "../../../core/assets/utils/request";
 import BtnSumbit from "../../../core/components/ButtonSubmit";
 import GamesFilter from "../GamesFilter";
@@ -33,7 +33,7 @@ const LotteryList = () => {
   const [params, setParams] = useState<string[]>([]);
   const [filter, setFilter] = useState<number[]>([]);
   const userLogin: any = useSelector<RootState>(
-    (state) => state.userLogin.token
+    (state) => state.auth.token
   );
 
   const getGameList = useCallback(

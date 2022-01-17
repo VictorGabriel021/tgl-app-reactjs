@@ -1,21 +1,27 @@
+import { useSelector } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./core/components/Footer";
 import Navbar from "./core/components/Navbar";
+import PrivateRoute from "./core/components/Routes/PrivateRoute";
 import Auth from "./pages/Auth";
 import Lottery from "./pages/Lottery";
+import { RootState } from "./store/store";
 
 const Routes = () => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
   return (
     <BrowserRouter>
       <Navbar />
       <Switch>
         <Redirect from="/" to="/auth/login" exact />
         <Route path="/auth">
-          <Auth />
+          {!isAuthenticated && <Auth />}
+          {isAuthenticated && <Redirect to="/lottery" />}
         </Route>
-        <Route path="/lottery">
+        <PrivateRoute path="/lottery">
           <Lottery />
-        </Route>
+        </PrivateRoute>
         <Route path="*">not found</Route>
       </Switch>
       <Footer />

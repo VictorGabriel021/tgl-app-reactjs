@@ -1,4 +1,4 @@
-import { Bet } from "../types/types";
+import { Bet } from "../interfaces/interfaces";
 
 export const isEqualBet = (betList: Bet[], betItem: Bet) => {
   let selectedNumberGame = [...betItem.numbers];

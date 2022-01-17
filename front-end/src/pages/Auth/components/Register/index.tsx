@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
-import { AuthCard } from "../../../../core/assets/types/types";
+import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
 import Card from "../../../../core/components/Card";
-import { saveUserData } from "../../../../store/userLoginSlice";
+import { login } from "../../../../store/authSlice";
 import BtnSumbit from "../../../../core/components/ButtonSubmit";
 import { ErrorMessage, Form, Input, Label, TextCenter } from "../styles";
 
@@ -36,7 +36,7 @@ const Register = ({ title, textButton, textRedirect }: AuthCard) => {
         },
       });
       const data = await response.data;
-      dispatch(saveUserData(data));
+      dispatch(login(data));
       history.push("/lottery");
     } catch (error: any) {
       let errorMessage = "Network Error";

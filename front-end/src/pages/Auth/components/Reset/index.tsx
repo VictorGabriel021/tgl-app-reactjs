@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
 import { useHistory } from "react-router-dom";
-import { AuthCard } from "../../../../core/assets/types/types";
+import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
 import BtnSumbit from "../../../../core/components/ButtonSubmit";
 
 interface IFormInput {

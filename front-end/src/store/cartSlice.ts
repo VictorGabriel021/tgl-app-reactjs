@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Bet } from "../core/assets/types/types";
+import { Bet } from "../core/assets/interfaces/interfaces";
 
 type BetList = {
   games: Bet[];

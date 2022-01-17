@@ -8,7 +8,7 @@ import {
   DescriptionGame,
 } from "./styles";
 import GamesCard from "./Card";
-import { GameFilter, GameInfo } from "../../../core/assets/types/types";
+import { GameFilter, GameInfo } from "../../../core/assets/interfaces/interfaces";
 import GenerateNumbers from "./Numbers";
 import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
 import { useDispatch } from "react-redux";

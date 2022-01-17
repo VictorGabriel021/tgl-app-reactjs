@@ -1,4 +1,4 @@
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Link, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import {
   Container,
   Div,
@@ -11,8 +11,18 @@ import {
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Reset from "./components/Reset";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/authSlice";
 
 const Auth = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(logout());
+  }, [dispatch, history]);
+
   return (
     <Container className="container">
       <Content className="row">

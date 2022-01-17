@@ -22,6 +22,15 @@ export const NavLogo = styled.h2`
   padding: 10px 10px 0 10px;
   z-index: 1;
 
+  a {
+    color: unset;
+    text-decoration: unset;
+  }
+
+  a:hover {
+    color: #5c5a5a;
+  }
+
   @media (max-width: 500px) {
     font-size: 28px;
     margin-right: 10px;
@@ -31,6 +40,15 @@ export const NavLogo = styled.h2`
 export const NavItem = styled.p`
   font-size: 20px;
   margin-bottom: 0;
+
+  a {
+    color: unset;
+    text-decoration: unset;
+  }
+
+  a:hover {
+    color: #5c5a5a;
+  }
 
   @media (max-width: 500px) {
     font-size: 14px;
@@ -45,6 +63,11 @@ export const NavItemAccount = styled(NavItem)`
 `;
 
 export const NavItemLogout = styled(NavItem)`
+  cursor: pointer;
+  &:hover {
+    color: #5c5a5a;
+  }
+
   svg {
     margin-left: 15px;
     font-size: 25px;

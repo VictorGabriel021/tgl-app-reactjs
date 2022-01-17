@@ -1,6 +1,6 @@
 import { BsCart3 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { Bet, GameInfo } from "../../../../core/assets/types/types";
+import { Bet, GameInfo } from "../../../../core/assets/interfaces/interfaces";
 import { sortArray } from "../../../../core/assets/utils/array";
 import { isEqualBet } from "../../../../core/assets/utils/bet";
 import { clearGame, completeGame } from "../../../../store/betSlice";

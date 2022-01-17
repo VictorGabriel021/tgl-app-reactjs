@@ -2,7 +2,7 @@ import { HiOutlineArrowRight } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { GameFilter } from "../../../../core/assets/types/types";
+import { GameFilter } from "../../../../core/assets/interfaces/interfaces";
 import { priceReal } from "../../../../core/assets/utils/price";
 import { makeRequest } from "../../../../core/assets/utils/request";
 import { RootState } from "../../../../store/store";
@@ -25,7 +25,7 @@ const GamesCard = ({ gamesList }: Props) => {
   const TotalPrice =
     totalCart === 0 ? "TOTAL: R$ 0,00" : `TOTAL: ${priceReal(totalCart)}`;
   const history = useHistory();
-  const { token } = useSelector((state: RootState) => state.userLogin.token);
+  const { token } = useSelector((state: RootState) => state.auth.token);
 
   const saveBet = async () => {
     try {

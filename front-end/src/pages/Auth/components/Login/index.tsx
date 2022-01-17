@@ -12,8 +12,8 @@ import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { saveUserData } from "../../../../store/userLoginSlice";
-import { AuthCard } from "../../../../core/assets/types/types";
+import { login } from "../../../../store/authSlice";
+import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
 import BtnSumbit from "../../../../core/components/ButtonSubmit";
 
 interface IFormInput {
@@ -41,7 +41,7 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
         },
       });
       const data = await response.data;
-      dispatch(saveUserData(data));
+      dispatch(login(data));
       history.push("/lottery");
     } catch (error: any) {
       let errorMessage = "Network Error";
