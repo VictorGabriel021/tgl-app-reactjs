@@ -3,25 +3,26 @@ import Card from "../../../../core/components/Card";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
-import { useHistory } from "react-router-dom";
 import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
 import BtnSumbit from "../../../../core/components/ButtonSubmit";
+import { useState } from "react";
+import ChangePassword from "./ChangePassword";
 
 interface IFormInput {
   email: string;
 }
 
 const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
+  const [resetToken, setResetToken] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-  const history = useHistory();
 
   const onSubmit = async (dataForm: IFormInput) => {
     try {
-      await makeRequest({
+      const response = await makeRequest({
         url: "/reset",
         method: "POST",
         data: dataForm,
@@ -29,7 +30,7 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
           "Content-Type": "application/json",
         },
       });
-      history.push("/");
+      setResetToken(response.data.token);
     } catch (error: any) {
       let errorMessage = "Network Error";
       if (error.message === "Request failed with status code 404") {
@@ -40,6 +41,16 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
       });
     }
   };
+
+  if (resetToken.length > 0) {
+    return (
+      <ChangePassword
+        title={title}
+        textRedirect={textRedirect}
+        resetToken={resetToken}
+      />
+    );
+  }
 
   return (
     <Card
