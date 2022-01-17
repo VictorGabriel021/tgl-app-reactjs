@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+import PageNotFound from "../../core/components/PageNotFound";
 import LotteryGames from "./Games";
 import LotteryList from "./List";
 
@@ -11,6 +12,9 @@ const Lottery = () => {
       </Route>
       <Route path="/lottery/games" exact>
         <LotteryGames />
+      </Route>
+      <Route path="*">
+        <PageNotFound />
       </Route>
     </Switch>
   );

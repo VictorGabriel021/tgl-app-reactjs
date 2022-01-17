@@ -14,6 +14,7 @@ import Reset from "./components/Reset";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
+import PageNotFound from "../../core/components/PageNotFound";
 
 const Auth = () => {
   const history = useHistory();
@@ -60,6 +61,9 @@ const Auth = () => {
                 textButton="Register"
                 textRedirect="Back"
               />
+            </Route>
+            <Route path="*">
+              <PageNotFound />
             </Route>
           </Switch>
         </Div>

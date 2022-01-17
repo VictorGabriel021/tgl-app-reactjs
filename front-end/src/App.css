@@ -4,3 +4,9 @@ body {
   color: #707070 !important;
   background-color: #f7f7f7 !important;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}
