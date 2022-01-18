@@ -1,6 +1,5 @@
 import {
   TextParagrath,
-  Form,
   Input,
   Label,
   TextCenter,
@@ -48,7 +47,7 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
       arrowLeft={false}
       urlRedirect="/auth/register"
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Label>Email *</Label>
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <Input
@@ -78,7 +77,7 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
         <TextCenter>
           <BtnSumbit textButton={textButton} />
         </TextCenter>
-      </Form>
+      </form>
     </Card>
   );
 };

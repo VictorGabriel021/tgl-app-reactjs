@@ -5,7 +5,7 @@ import { makeRequest } from "../../../../../core/assets/utils/request";
 import BtnSumbit from "../../../../../core/components/ButtonSubmit";
 import Card from "../../../../../core/components/Card";
 import { TextCenter } from "../../../styles";
-import { ErrorMessage, Form, Input, Label } from "../../styles";
+import { ErrorMessage, Input, Label } from "../../styles";
 
 interface IFormInput {
   password: string;
@@ -57,9 +57,9 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
       title={title}
       textRedirect={textRedirect}
       arrowLeft={true}
-      urlRedirect="/"
+      urlRedirect="../"
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Label>Nova Senha *</Label>
         {errors.password && (
           <ErrorMessage>{errors.password.message}</ErrorMessage>
@@ -85,7 +85,7 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
         <TextCenter>
           <BtnSumbit textButton="Confirm" />
         </TextCenter>
-      </Form>
+      </form>
     </Card>
   );
 };

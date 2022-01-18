@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-export const Form = styled.form``;
-
 export const Label = styled.label`
   color: #9d9d9d;
   font-weight: bold;

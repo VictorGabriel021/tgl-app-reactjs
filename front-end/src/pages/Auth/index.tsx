@@ -1,7 +1,6 @@
 import { Link, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import {
   Container,
-  Div,
   Title,
   Button,
   Subtitle,
@@ -38,7 +37,7 @@ const Auth = () => {
           </Link>
           <Subtitle>lottery</Subtitle>
         </TextCenter>
-        <Div className="col-12 col-lg-6">
+        <div className="col-12 col-lg-6">
           <Switch>
             <Redirect from="/auth" to="/auth/login" exact />
             <Route path="/auth/login" exact>
@@ -66,7 +65,7 @@ const Auth = () => {
               <PageNotFound />
             </Route>
           </Switch>
-        </Div>
+        </div>
       </Content>
     </Container>
   );

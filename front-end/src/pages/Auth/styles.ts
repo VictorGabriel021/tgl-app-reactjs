@@ -6,12 +6,10 @@ export const Container = styled.div`
   }
 `;
 
-export const Div = styled.div``;
-
 export const Content = styled.div`
-  height: 100vh;
+  height: 83vh;
   align-items: center;
-  @media (max-width: 500px) {
+  @media (max-width: 991.98px) {
     height: auto;
   }
 `;

@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ChooiceNumber } from "./styles";
-import { addNumberInList } from "../../../../store/betSlice";
+import {
+  addNumberInList,
+  removeNumberFromList,
+} from "../../../../store/betSlice";
 import { RootState } from "../../../../store/store";
 
 type Props = {
@@ -19,8 +22,16 @@ const GenerateNumbers = ({ numbers, maxNumbers }: Props) => {
     value++;
   }
 
-  const addNumberInListHandler = (item: {}) => {
-    dispatch(addNumberInList(item));
+  const addAndRemoveNumberHandler = (item: number) => {
+    if (!numbersGame.includes(item)) {
+      if (maxNumbers > numbersGame.length) {
+        dispatch(addNumberInList(item));
+      } else {
+        window.alert(`Você já selecionou ${maxNumbers} números!`);
+      }
+    } else {
+      dispatch(removeNumberFromList(item));
+    }
   };
 
   return (
@@ -35,10 +46,7 @@ const GenerateNumbers = ({ numbers, maxNumbers }: Props) => {
             key={item}
             id={item}
             className={`${numbersGame.includes(item) && "active"}`}
-            onClick={addNumberInListHandler.bind(null, {
-              item: item,
-              maxNumbers: maxNumbers,
-            })}
+            onClick={addAndRemoveNumberHandler.bind(null, item)}
           >
             {numberItem}
           </ChooiceNumber>

@@ -37,6 +37,11 @@ export interface Bet {
   numbers: number[];
 }
 
+export interface BetList {
+  games: Bet[];
+  totalCart: number;
+}
+
 export interface UserLogin {
   user: {
     id: number;

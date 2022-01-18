@@ -11,17 +11,10 @@ export const betSlice = createSlice({
   initialState: initialStateLogin,
   reducers: {
     addNumberInList: (state, action) => {
-      if (!state.numbers.includes(action.payload.item)) {
-        if (action.payload.maxNumbers > state.numbers.length) {
-          state.numbers.push(action.payload.item);
-        } else {
-          window.alert(
-            `Você já selecionou ${action.payload.maxNumbers} números!`
-          );
-        }
-      } else {
-        state.numbers.splice(state.numbers.indexOf(action.payload.item), 1);
-      }
+      state.numbers.push(action.payload);
+    },
+    removeNumberFromList: (state, action) => {
+      state.numbers.splice(state.numbers.indexOf(action.payload), 1);
     },
     completeGame: (state, action) => {
       if (state.numbers.length < action.payload.max_number) {
@@ -44,7 +37,12 @@ export const betSlice = createSlice({
   },
 });
 
-export const { addNumberInList, completeGame, clearGame, getGameId } =
-  betSlice.actions;
+export const {
+  addNumberInList,
+  removeNumberFromList,
+  completeGame,
+  clearGame,
+  getGameId,
+} = betSlice.actions;
 
 export default betSlice.reducer;

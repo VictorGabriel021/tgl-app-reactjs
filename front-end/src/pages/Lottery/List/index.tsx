@@ -115,6 +115,9 @@ const LotteryList = () => {
             </Link>
           </FiltersMain>
           {gamesList.map((game) => {
+            const gameColor = gameFilter.types.find(
+              (item) => item.id === game.game_id
+            )!.color;
             return (
               <LotteryItem
                 key={game.id}
@@ -122,7 +125,7 @@ const LotteryList = () => {
                 gameDate={game.created_at}
                 gameType={game.type.type}
                 price={game.price}
-                color={gameFilter.types[game.type.id - 1].color}
+                color={gameColor}
               />
             );
           })}

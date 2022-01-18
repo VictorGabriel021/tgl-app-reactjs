@@ -1,4 +1,4 @@
-import { Form, Input, Label, TextCenter, ErrorMessage } from "../styles";
+import { Input, Label, TextCenter, ErrorMessage } from "../styles";
 import Card from "../../../../core/components/Card";
 import { useForm } from "react-hook-form";
 import { makeRequest } from "../../../../core/assets/utils/request";
@@ -45,9 +45,9 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
       title={title}
       textRedirect={textRedirect}
       arrowLeft={true}
-      urlRedirect="/"
+      urlRedirect="../"
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Label>Email *</Label>
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <Input
@@ -63,7 +63,7 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
         <TextCenter>
           <BtnSumbit textButton={textButton} />
         </TextCenter>
-      </Form>
+      </form>
     </Card>
   );
 };

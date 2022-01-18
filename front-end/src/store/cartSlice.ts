@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Bet } from "../core/assets/interfaces/interfaces";
-
-type BetList = {
-  games: Bet[];
-  totalCart: number;
-};
+import { BetList } from "../core/assets/interfaces/interfaces";
 
 const initialStateLogin: BetList = {
   games: [],
@@ -19,7 +14,7 @@ export const cartSlice = createSlice({
       state.games.push(action.payload.betItem);
       state.totalCart += action.payload.selectedGame.price;
     },
-    removeToCart: (state, action) => {
+    removeFromCart: (state, action) => {
       state.games.splice(action.payload.id, 1);
       state.totalCart -= action.payload.price;
     },
@@ -30,6 +25,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeToCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,7 +1,7 @@
 import { BsTrash } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { priceReal } from "../../../../../core/assets/utils/price";
-import { removeToCart } from "../../../../../store/cartSlice";
+import { removeFromCart } from "../../../../../store/cartSlice";
 import {
   ColorGame,
   IconTrash,
@@ -31,7 +31,7 @@ const LotteryCardItem = ({
 
   const removeToCartHandler = () => {
     if (window.confirm("Você realmente deseja excluir esta aposta ?"))
-      dispatch(removeToCart({ id, price }));
+      dispatch(removeFromCart({ id, price }));
   };
 
   return (

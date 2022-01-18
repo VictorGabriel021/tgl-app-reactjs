@@ -6,7 +6,7 @@ import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
 import Card from "../../../../core/components/Card";
 import { login } from "../../../../store/authSlice";
 import BtnSumbit from "../../../../core/components/ButtonSubmit";
-import { ErrorMessage, Form, Input, Label, TextCenter } from "../styles";
+import { ErrorMessage, Input, Label, TextCenter } from "../styles";
 
 interface IFormInput {
   name: string;
@@ -46,9 +46,9 @@ const Register = ({ title, textButton, textRedirect }: AuthCard) => {
       title={title}
       textRedirect={textRedirect}
       arrowLeft={true}
-      urlRedirect="/"
+      urlRedirect="../"
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Label>Name *</Label>
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         <Input
@@ -84,7 +84,7 @@ const Register = ({ title, textButton, textRedirect }: AuthCard) => {
         <TextCenter>
           <BtnSumbit textButton={textButton} />
         </TextCenter>
-      </Form>
+      </form>
     </Card>
   );
 };
