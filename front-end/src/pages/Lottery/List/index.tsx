@@ -64,8 +64,23 @@ const LotteryList = () => {
   }
 
   useEffect(() => {
-    getGameList();
-    fetchData();
+    const clearRequest = setTimeout(function () {
+      fetchData();
+    }, 500);
+
+    return () => {
+      clearTimeout(clearRequest);
+    };
+  }, []);
+
+  useEffect(() => {
+    const clearRequest = setTimeout(function () {
+      getGameList();
+    }, 500);
+
+    return () => {
+      clearTimeout(clearRequest);
+    };
   }, [getGameList]);
 
   const onUpdateGameListHandler = (game: GameInfo) => {
