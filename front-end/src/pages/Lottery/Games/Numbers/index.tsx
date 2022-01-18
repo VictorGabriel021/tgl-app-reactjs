@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ChooiceNumber } from "./styles";
-import {
-  addNumberInList,
-  removeNumberFromList,
-} from "../../../../store/betSlice";
-import { RootState } from "../../../../store/store";
+import { addNumberInList, removeNumberFromList } from "@store/betSlice";
+import { RootState } from "@store/store";
 
 type Props = {
   numbers: number;

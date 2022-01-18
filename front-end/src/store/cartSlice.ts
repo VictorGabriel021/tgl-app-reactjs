@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BetList } from "../core/assets/interfaces/interfaces";
+import { BetList } from "@core/assets/interfaces/interfaces";
 
 const initialStateLogin: BetList = {
   games: [],

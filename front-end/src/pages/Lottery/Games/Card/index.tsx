@@ -2,10 +2,10 @@ import { HiOutlineArrowRight } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { GameFilter } from "../../../../core/assets/interfaces/interfaces";
-import { priceReal } from "../../../../core/assets/utils/price";
-import { makeRequest } from "../../../../core/assets/utils/request";
-import { RootState } from "../../../../store/store";
+import { GameFilter } from "@core/assets/interfaces/interfaces";
+import { priceReal } from "@core/assets/utils/price";
+import { makeRequest } from "@core/assets/utils/request";
+import { RootState } from "@store/store";
 import LotteryCardItem from "./Item";
 import {
   CardCart,

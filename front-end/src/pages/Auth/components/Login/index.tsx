@@ -5,14 +5,14 @@ import {
   TextCenter,
   ErrorMessage,
 } from "../styles";
-import Card from "../../../../core/components/Card";
+import Card from "@core/components/Card";
 import { useForm } from "react-hook-form";
-import { makeRequest } from "../../../../core/assets/utils/request";
+import { makeRequest } from "@core/assets/utils/request";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../../../store/authSlice";
-import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
-import BtnSumbit from "../../../../core/components/ButtonSubmit";
+import { login } from "@store/authSlice";
+import { AuthCard } from "@core/assets/interfaces/interfaces";
+import BtnSumbit from "@core/components/ButtonSubmit";
 
 interface IFormInput {
   email: string;

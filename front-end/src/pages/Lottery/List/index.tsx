@@ -3,12 +3,12 @@ import {
   GameFilter,
   GameInfo,
   GamesList,
-} from "../../../core/assets/interfaces/interfaces";
-import { makeRequest } from "../../../core/assets/utils/request";
-import BtnSumbit from "../../../core/components/ButtonSubmit";
+} from "@core/assets/interfaces/interfaces";
+import { makeRequest } from "@core/assets/utils/request";
+import BtnSumbit from "@core/components/ButtonSubmit";
 import GamesFilter from "../GamesFilter";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { RootState } from "@store/store";
 import {
   Container,
   Content,
@@ -19,8 +19,8 @@ import {
 } from "./styles";
 import LotteryItem from "./Item";
 import { Link } from "react-router-dom";
-import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
-import Loading from "../../../core/components/Loading";
+import { getFilterGames } from "@core/assets/utils/requestGetFilterGames";
+import Loading from "@core/components/Loading";
 
 const LotteryList = () => {
   const [gamesList, setGamesList] = useState<GamesList[]>([]);

@@ -1,8 +1,8 @@
 import { HiOutlineArrowRight } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { logout } from "../../../store/authSlice";
-import { RootState } from "../../../store/store";
+import { logout } from "@store/authSlice";
+import { RootState } from "@store/store";
 import {
   NavContainer,
   NavContent,

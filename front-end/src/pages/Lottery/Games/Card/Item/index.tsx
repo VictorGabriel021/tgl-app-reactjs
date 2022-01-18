@@ -1,14 +1,14 @@
 import { BsTrash } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { priceReal } from "../../../../../core/assets/utils/price";
-import { removeFromCart } from "../../../../../store/cartSlice";
+import { priceReal } from "@core/assets/utils/price";
+import { removeFromCart } from "@store/cartSlice";
 import {
   ColorGame,
   IconTrash,
   ItemContent,
   TextParagraph,
   TextParagraphBoldMedia,
-} from "../../../styles";
+} from "@pages/Lottery/styles";
 
 type Props = {
   id: number;

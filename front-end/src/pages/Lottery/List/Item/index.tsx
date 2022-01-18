@@ -1,11 +1,11 @@
-import { dateBrazil } from "../../../../core/assets/utils/date";
-import { priceReal } from "../../../../core/assets/utils/price";
+import { dateBrazil } from "@core/assets/utils/date";
+import { priceReal } from "@core/assets/utils/price";
 import {
   ColorGame,
   ItemContent,
   TextParagraph,
   TextParagraphBold,
-} from "../../styles";
+} from "@pages/Lottery/styles";
 
 type Props = {
   choosen_numbers: string;

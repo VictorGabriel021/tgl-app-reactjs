@@ -1,9 +1,9 @@
 import { Input, Label, TextCenter, ErrorMessage } from "../styles";
-import Card from "../../../../core/components/Card";
+import Card from "@core/components/Card";
 import { useForm } from "react-hook-form";
-import { makeRequest } from "../../../../core/assets/utils/request";
-import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
-import BtnSumbit from "../../../../core/components/ButtonSubmit";
+import { makeRequest } from "@core/assets/utils/request";
+import { AuthCard } from "@core/assets/interfaces/interfaces";
+import BtnSumbit from "@core/components/ButtonSubmit";
 import { useState } from "react";
 import ChangePassword from "./ChangePassword";
 

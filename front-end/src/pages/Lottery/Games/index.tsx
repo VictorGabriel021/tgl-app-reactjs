@@ -8,17 +8,14 @@ import {
   DescriptionGame,
 } from "./styles";
 import GamesCard from "./Card";
-import {
-  GameFilter,
-  GameInfo,
-} from "../../../core/assets/interfaces/interfaces";
+import { GameFilter, GameInfo } from "@core/assets/interfaces/interfaces";
 import GenerateNumbers from "./Numbers";
-import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
+import { getFilterGames } from "@core/assets/utils/requestGetFilterGames";
 import { useDispatch } from "react-redux";
-import { clearGame, getGameId } from "../../../store/betSlice";
+import { clearGame, getGameId } from "@store/betSlice";
 import ActionsButtons from "./ActionsButtons";
-import { clearCart } from "../../../store/cartSlice";
-import Loading from "../../../core/components/Loading";
+import { clearCart } from "@store/cartSlice";
+import Loading from "@core/components/Loading";
 
 const LotteryGames = () => {
   const dispatch = useDispatch();

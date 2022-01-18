@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { makeRequest } from "../../../../core/assets/utils/request";
-import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
-import Card from "../../../../core/components/Card";
-import { login } from "../../../../store/authSlice";
-import BtnSumbit from "../../../../core/components/ButtonSubmit";
+import { makeRequest } from "@core/assets/utils/request";
+import { AuthCard } from "@core/assets/interfaces/interfaces";
+import Card from "@core/components/Card";
+import { login } from "@store/authSlice";
+import BtnSumbit from "@core/components/ButtonSubmit";
 import { ErrorMessage, Input, Label, TextCenter } from "../styles";
 
 interface IFormInput {

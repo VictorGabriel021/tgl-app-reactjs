@@ -1,4 +1,4 @@
-import { makeRequest } from "../../../core/assets/utils/request";
+import { makeRequest } from "@core/assets/utils/request";
 
 export async function getFilterGames() {
   try {

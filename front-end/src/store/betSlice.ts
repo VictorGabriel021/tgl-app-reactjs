@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Bet } from "../core/assets/interfaces/interfaces";
+import { Bet } from "@core/assets/interfaces/interfaces";
 
 const initialStateLogin: Bet = {
   game_id: 0,

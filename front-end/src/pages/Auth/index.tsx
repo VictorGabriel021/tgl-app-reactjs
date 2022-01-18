@@ -7,13 +7,13 @@ import {
   TextCenter,
   Content,
 } from "./styles";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Reset from "./components/Reset";
+import Login from "@pages/Auth/components/Login";
+import Register from "@pages/Auth/components/Register";
+import Reset from "@pages/Auth/components/Reset";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/authSlice";
-import PageNotFound from "../../core/components/PageNotFound";
+import { logout } from "@store/authSlice";
+import PageNotFound from "@core/components/PageNotFound";
 
 const Auth = () => {
   const history = useHistory();

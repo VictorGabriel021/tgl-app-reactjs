@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { makeRequest } from "../../../../../core/assets/utils/request";
-import BtnSumbit from "../../../../../core/components/ButtonSubmit";
-import Card from "../../../../../core/components/Card";
-import { TextCenter } from "../../../styles";
-import { ErrorMessage, Input, Label } from "../../styles";
+import { makeRequest } from "@core/assets/utils/request";
+import BtnSumbit from "@core/components/ButtonSubmit";
+import Card from "@core/components/Card";
+import { TextCenter } from "@pages/Auth/styles";
+import { ErrorMessage, Input, Label } from "@pages/Auth/components/styles";
 
 interface IFormInput {
   password: string;

@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import PageNotFound from "../../core/components/PageNotFound";
+import PageNotFound from "@core/components/PageNotFound";
 import LotteryGames from "./Games";
 import LotteryList from "./List";
 
