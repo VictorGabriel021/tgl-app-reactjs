@@ -8,7 +8,6 @@ import {
 } from "../styles";
 import Card from "../../../../core/components/Card";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -36,22 +35,10 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
         url: "/login",
         method: "POST",
         data: dataForm,
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
-      const data = await response.data;
-      dispatch(login(data));
+      dispatch(login(response.data));
       history.push("/lottery");
-    } catch (error: any) {
-      let errorMessage = "Network Error";
-      if (error.message === "Request failed with status code 401") {
-        errorMessage = "Email or password invalid !";
-      }
-      toast.error(errorMessage, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    } catch (error: any) {}
   };
 
   return (
@@ -62,27 +49,27 @@ const Login = ({ title, textButton, textRedirect }: AuthCard) => {
       urlRedirect="/auth/register"
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label>Email</Label>
+        <Label>Email *</Label>
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <Input
           type="email"
           {...register("email", {
-            required: "This field is required",
+            required: "Este campo é obrigatório",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Email invalid",
+              message: "Email inválido",
             },
           })}
         />
-        <Label>Password</Label>
+        <Label>Password *</Label>
         {errors.password && (
           <ErrorMessage>{errors.password.message}</ErrorMessage>
         )}
         <Input
           type="password"
           {...register("password", {
-            required: "This field is required",
-            minLength: { value: 4, message: "Must be at least 4 characters" },
+            required: "Este campo é obrigatório",
+            minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },
           })}
         />
         <TextParagrath>

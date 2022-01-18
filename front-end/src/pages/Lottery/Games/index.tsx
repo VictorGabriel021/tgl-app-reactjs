@@ -8,7 +8,10 @@ import {
   DescriptionGame,
 } from "./styles";
 import GamesCard from "./Card";
-import { GameFilter, GameInfo } from "../../../core/assets/interfaces/interfaces";
+import {
+  GameFilter,
+  GameInfo,
+} from "../../../core/assets/interfaces/interfaces";
 import GenerateNumbers from "./Numbers";
 import { getFilterGames } from "../../../core/assets/utils/requestGetFilterGames";
 import { useDispatch } from "react-redux";
@@ -34,11 +37,13 @@ const LotteryGames = () => {
   });
 
   const fetchData = useCallback(async () => {
-    const response = await getFilterGames();
-    setGamesList(response);
-    setSelectedGame(response.types[0]);
-    setFilter([response.types[0].id]);
-    dispatch(getGameId(response.types[0].id));
+    try {
+      const response = await getFilterGames();
+      setGamesList(response);
+      setSelectedGame(response.types[0]);
+      setFilter([response.types[0].id]);
+      dispatch(getGameId(response.types[0].id));
+    } catch (error: any) {}
   }, [dispatch]);
 
   useEffect(() => {

@@ -34,7 +34,6 @@ const GamesCard = ({ gamesList }: Props) => {
         url: "/bet/new-bet",
         data: { games: games },
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -42,15 +41,7 @@ const GamesCard = ({ gamesList }: Props) => {
       toast.success("Apostas cadastradas com sucesso !", {
         position: toast.POSITION.TOP_RIGHT,
       });
-    } catch (error: any) {
-      let errorMessage = "Erro no servidor !";
-      if (error.message === "Request failed with status code 401") {
-        errorMessage = "Não autorizado !";
-      }
-      toast.error(errorMessage, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    } catch (error: any) {}
   };
 
   const saveBetListhandler = () => {

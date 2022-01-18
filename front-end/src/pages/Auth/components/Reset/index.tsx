@@ -1,7 +1,6 @@
 import { Form, Input, Label, TextCenter, ErrorMessage } from "../styles";
 import Card from "../../../../core/components/Card";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { makeRequest } from "../../../../core/assets/utils/request";
 import { AuthCard } from "../../../../core/assets/interfaces/interfaces";
 import BtnSumbit from "../../../../core/components/ButtonSubmit";
@@ -26,20 +25,9 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
         url: "/reset",
         method: "POST",
         data: dataForm,
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
       setResetToken(response.data.token);
-    } catch (error: any) {
-      let errorMessage = "Network Error";
-      if (error.message === "Request failed with status code 404") {
-        errorMessage = "User not found !";
-      }
-      toast.error(errorMessage, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    } catch (error: any) {}
   };
 
   if (resetToken.length > 0) {
@@ -60,15 +48,15 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
       urlRedirect="/"
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label>Email</Label>
+        <Label>Email *</Label>
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <Input
           type="email"
           {...register("email", {
-            required: "This field is required",
+            required: "Este campo é obrigatório",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Email invalid",
+              message: "Email inválido",
             },
           })}
         />

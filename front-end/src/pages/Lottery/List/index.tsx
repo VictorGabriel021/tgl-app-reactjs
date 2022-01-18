@@ -7,10 +7,8 @@ import {
 import { makeRequest } from "../../../core/assets/utils/request";
 import BtnSumbit from "../../../core/components/ButtonSubmit";
 import GamesFilter from "../GamesFilter";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-
 import {
   Container,
   Content,
@@ -29,12 +27,9 @@ const LotteryList = () => {
     min_cart_value: 0,
     types: [],
   });
-
   const [params, setParams] = useState<string[]>([]);
   const [filter, setFilter] = useState<number[]>([]);
-  const userLogin: any = useSelector<RootState>(
-    (state) => state.auth.token
-  );
+  const { token } = useSelector((state: RootState) => state.auth.token);
 
   const getGameList = useCallback(
     async (types?: string[]) => {
@@ -48,27 +43,21 @@ const LotteryList = () => {
         const response = await makeRequest({
           url: "/bet/all-bets",
           headers: {
-            Authorization: `Bearer ${userLogin.token}`,
+            Authorization: `Bearer ${token}`,
           },
           params,
         });
         setGamesList(response.data);
-      } catch (error: any) {
-        let errorMessage = "Network Error";
-        if (error.message === "Request failed with status code 404") {
-          errorMessage = "List Games not found !";
-        }
-        toast.error(errorMessage, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
+      } catch (error: any) {}
     },
-    [userLogin.token]
+    [token]
   );
 
   async function fetchData() {
-    const response = await getFilterGames();
-    setGameFilter(response);
+    try {
+      const response = await getFilterGames();
+      setGameFilter(response);
+    } catch (error: any) {}
   }
 
   useEffect(() => {
@@ -133,7 +122,7 @@ const LotteryList = () => {
                 gameDate={game.created_at}
                 gameType={game.type.type}
                 price={game.price}
-                color={gameFilter.types[(game.type.id - 1)].color}
+                color={gameFilter.types[game.type.id - 1].color}
               />
             );
           })}

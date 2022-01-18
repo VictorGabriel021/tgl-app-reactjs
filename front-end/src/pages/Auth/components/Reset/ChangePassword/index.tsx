@@ -34,32 +34,22 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
           url: `/reset/${resetToken}`,
           method: "POST",
           data: { password: dataForm.password },
-          headers: {
-            "Content-Type": "application/json",
-          },
         });
         history.push("/");
         toast.success("Senha alterada !", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      } catch (error: any) {
-        let errorMessage = "Network Error";
-        if (error.message === "Request failed with status code 404") {
-          errorMessage = "User not found !";
-        }
-        toast.error(errorMessage, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
+      } catch (error: any) {}
+    } else {
+      setError("password", {
+        type: "validate",
+        message: "Senha não é igual !",
+      });
+      setError("confirmPassword", {
+        type: "validate",
+        message: "Senha não é igual !",
+      });
     }
-    setError("password", {
-      type: "validate",
-      message: "Password not equal !",
-    });
-    setError("confirmPassword", {
-      type: "validate",
-      message: "Password not equal !",
-    });
   };
 
   return (
@@ -70,26 +60,26 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
       urlRedirect="/"
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label>Nova Senha</Label>
+        <Label>Nova Senha *</Label>
         {errors.password && (
           <ErrorMessage>{errors.password.message}</ErrorMessage>
         )}
         <Input
           type="password"
           {...register("password", {
-            required: "This field is required",
-            minLength: { value: 4, message: "Must be at least 4 characters" },
+            required: "Este campo é obrigatório",
+            minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },
           })}
         />
-        <Label>Confirmar Senha</Label>
+        <Label>Confirmar Senha *</Label>
         {errors.confirmPassword && (
           <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
         )}
         <Input
           type="password"
           {...register("confirmPassword", {
-            required: "This field is required",
-            minLength: { value: 4, message: "Must be at least 4 characters" },
+            required: "Este campo é obrigatório",
+            minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },
           })}
         />
         <TextCenter>
