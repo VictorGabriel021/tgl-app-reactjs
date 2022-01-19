@@ -76,6 +76,7 @@ const Register = ({ title, textButton, textRedirect }: AuthCard) => {
         )}
         <Input
           type="password"
+          autoComplete="on"
           {...register("password", {
             required: "Este campo é obrigatório",
             minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },

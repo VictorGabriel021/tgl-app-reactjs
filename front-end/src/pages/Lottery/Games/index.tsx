@@ -16,6 +16,7 @@ import { clearGame, getGameId } from "@store/betSlice";
 import ActionsButtons from "./ActionsButtons";
 import { clearCart } from "@store/cartSlice";
 import Loading from "@core/components/Loading";
+import Error from "@core/components/Error";
 
 const LotteryGames = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const LotteryGames = () => {
     types: [],
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -43,7 +45,9 @@ const LotteryGames = () => {
       setSelectedGame(response.types[0]);
       setFilter([response.types[0].id]);
       dispatch(getGameId(response.types[0].id));
-    } catch (error: any) {}
+    } catch (error: any) {
+      setIsError(true);
+    }
     setIsLoading(false);
   }, [dispatch]);
 
@@ -62,37 +66,41 @@ const LotteryGames = () => {
     }
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <Container className="container">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div className="row">
-          <div className="col-12 col-lg-8">
-            <LotteryTitle>
-              <b>NEW BET</b> FOR {selectedGame.type}
-            </LotteryTitle>
-            <LotteryParagraph>Choose a game</LotteryParagraph>
-            <GamesFilter
-              onUpdateFilter={onUpdateGameListHandler}
-              filter={filter}
-              gamesList={gamesList.types}
+      <div className="row">
+        <div className="col-12 col-lg-8">
+          <LotteryTitle>
+            <b>NEW BET</b> FOR {selectedGame.type}
+          </LotteryTitle>
+          <LotteryParagraph>Choose a game</LotteryParagraph>
+          <GamesFilter
+            onUpdateFilter={onUpdateGameListHandler}
+            filter={filter}
+            gamesList={gamesList.types}
+          />
+          <LotteryParagraph>Fill your bet</LotteryParagraph>
+          <DescriptionGame>{selectedGame.description}</DescriptionGame>
+          <LotteryChooiceNumber>
+            <GenerateNumbers
+              numbers={selectedGame.range}
+              maxNumbers={selectedGame.max_number}
             />
-            <LotteryParagraph>Fill your bet</LotteryParagraph>
-            <DescriptionGame>{selectedGame.description}</DescriptionGame>
-            <LotteryChooiceNumber>
-              <GenerateNumbers
-                numbers={selectedGame.range}
-                maxNumbers={selectedGame.max_number}
-              />
-            </LotteryChooiceNumber>
-            <ActionsButtons selectedGame={selectedGame} />
-          </div>
-          <div className="col-12 col-lg-4">
-            <GamesCard gamesList={gamesList} />
-          </div>
+          </LotteryChooiceNumber>
+          <ActionsButtons selectedGame={selectedGame} />
         </div>
-      )}
+        <div className="col-12 col-lg-4">
+          <GamesCard gamesList={gamesList} />
+        </div>
+      </div>
     </Container>
   );
 };

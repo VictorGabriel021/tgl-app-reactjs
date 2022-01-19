@@ -66,6 +66,7 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
         )}
         <Input
           type="password"
+          autoComplete="on"
           {...register("password", {
             required: "Este campo é obrigatório",
             minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },
@@ -77,6 +78,7 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
         )}
         <Input
           type="password"
+          autoComplete="on"
           {...register("confirmPassword", {
             required: "Este campo é obrigatório",
             minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },

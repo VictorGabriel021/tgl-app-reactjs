@@ -21,6 +21,7 @@ import LotteryItem from "./Item";
 import { Link } from "react-router-dom";
 import { getFilterGames } from "@core/assets/utils/requestGetFilterGames";
 import Loading from "@core/components/Loading";
+import Error from "@core/components/Error";
 
 const LotteryList = () => {
   const [gamesList, setGamesList] = useState<GamesList[]>([]);
@@ -32,6 +33,7 @@ const LotteryList = () => {
   const [filter, setFilter] = useState<number[]>([]);
   const { token } = useSelector((state: RootState) => state.auth.token);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const getGameList = useCallback(
     async (types?: string[]) => {
@@ -56,10 +58,13 @@ const LotteryList = () => {
   );
 
   async function fetchData() {
+    setIsError(false);
     try {
       const response = await getFilterGames();
       setGameFilter(response);
-    } catch (error: any) {}
+    } catch (error: any) {
+      setIsError(true);
+    }
     setIsLoading(false);
   }
 
@@ -110,53 +115,54 @@ const LotteryList = () => {
     }
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError || !gameFilter) {
+    return <Error />;
+  }
+
   return (
     <Container>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        gameFilter.min_cart_value > 0 && (
-          <Content>
-            <div>
-              <FiltersMain>
-                <Subtitle>RECENT GAMES</Subtitle>
+      {gameFilter && gameFilter.min_cart_value > 0 && (
+        <Content>
+          <div>
+            <FiltersMain>
+              <Subtitle>RECENT GAMES</Subtitle>
+              <BtnSumbit className="fs-5 p-0 d-sm-none" textButton="New Bet" />
+              <Filters>
+                <TextFilter>Filters</TextFilter>
+                <GamesFilter
+                  onUpdateFilter={onUpdateGameListHandler}
+                  filter={filter}
+                  gamesList={gameFilter.types}
+                />
+              </Filters>
+              <Link to={"/lottery/games"}>
                 <BtnSumbit
-                  className="fs-5 p-0 d-sm-none"
+                  className="fs-5 p-0 d-none d-sm-inline"
                   textButton="New Bet"
                 />
-                <Filters>
-                  <TextFilter>Filters</TextFilter>
-                  <GamesFilter
-                    onUpdateFilter={onUpdateGameListHandler}
-                    filter={filter}
-                    gamesList={gameFilter.types}
-                  />
-                </Filters>
-                <Link to={"/lottery/games"}>
-                  <BtnSumbit
-                    className="fs-5 p-0 d-none d-sm-inline"
-                    textButton="New Bet"
-                  />
-                </Link>
-              </FiltersMain>
-              {gamesList.map((game) => {
-                const gameColor = gameFilter.types.find(
-                  (item) => item.id === game.game_id
-                )!.color;
-                return (
-                  <LotteryItem
-                    key={game.id}
-                    choosen_numbers={game.choosen_numbers}
-                    gameDate={game.created_at}
-                    gameType={game.type.type}
-                    price={game.price}
-                    color={gameColor}
-                  />
-                );
-              })}
-            </div>
-          </Content>
-        )
+              </Link>
+            </FiltersMain>
+            {gamesList.map((game) => {
+              const gameColor = gameFilter.types.find(
+                (item) => item.id === game.game_id
+              )!.color;
+              return (
+                <LotteryItem
+                  key={game.id}
+                  choosen_numbers={game.choosen_numbers}
+                  gameDate={game.created_at}
+                  gameType={game.type.type}
+                  price={game.price}
+                  color={gameColor}
+                />
+              );
+            })}
+          </div>
+        </Content>
       )}
     </Container>
   );

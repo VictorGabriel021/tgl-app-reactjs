@@ -36,7 +36,11 @@ const Navbar = () => {
           </NavItem>
         </NavSection>
         <NavSection>
-          {isAuthenticated && <NavItemAccount>Account</NavItemAccount>}
+          {isAuthenticated && (
+            <NavItemAccount>
+              <Link to="/user">Account</Link>
+            </NavItemAccount>
+          )}
           {isAuthenticated && (
             <NavItemLogout onClick={logoutHandler}>
               Log out
