@@ -10,13 +10,13 @@ import {
 import GamesCard from "./Card";
 import { GameFilter, GameInfo } from "@core/assets/interfaces/interfaces";
 import GenerateNumbers from "./Numbers";
-import { getFilterGames } from "@core/assets/utils/requestGetFilterGames";
 import { useDispatch } from "react-redux";
 import { clearGame, getGameId } from "@store/betSlice";
 import ActionsButtons from "./ActionsButtons";
 import { clearCart } from "@store/cartSlice";
 import Loading from "@core/components/Loading";
 import Error from "@core/components/Error";
+import { listGames } from "@core/assets/services/Games/ListGames";
 
 const LotteryGames = () => {
   const dispatch = useDispatch();
@@ -39,13 +39,13 @@ const LotteryGames = () => {
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
-    try {
-      const response = await getFilterGames();
+    const response = await listGames();
+    if (!!response) {
       setGamesList(response);
       setSelectedGame(response.types[0]);
       setFilter([response.types[0].id]);
       dispatch(getGameId(response.types[0].id));
-    } catch (error: any) {
+    } else {
       setIsError(true);
     }
     setIsLoading(false);

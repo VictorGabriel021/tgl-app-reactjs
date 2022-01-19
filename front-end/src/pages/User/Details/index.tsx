@@ -1,6 +1,5 @@
 import { UserInfo } from "@core/assets/interfaces/interfaces";
 import { dateBrazil } from "@core/assets/utils/date";
-import { makeRequest } from "@core/assets/utils/request";
 import Error from "@core/components/Error";
 import Loading from "@core/components/Loading";
 import { RootState } from "@store/store";
@@ -8,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Img, Button } from "./styles";
+import { myAccount } from "@core/assets/services/User/MyAccount";
 
 const UserDetails = () => {
   const { token } = useSelector((state: RootState) => state.auth.token);
@@ -27,15 +27,10 @@ const UserDetails = () => {
   });
 
   const fetchData = useCallback(async () => {
-    try {
-      const response = await makeRequest({
-        url: "/user/my-account",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUserInfo(response.data);
-    } catch (error: any) {
+    const response = await myAccount(token);
+    if (!!response) {
+      setUserInfo(response);
+    } else {
       setIsError(true);
     }
     setIsLoading(false);

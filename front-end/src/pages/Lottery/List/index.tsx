@@ -4,8 +4,9 @@ import {
   GameInfo,
   GamesList,
 } from "@core/assets/interfaces/interfaces";
-import { makeRequest } from "@core/assets/utils/request";
-import BtnSumbit from "@core/components/ButtonSubmit";
+
+import { BtnSumbit, Loading, Error } from "@core/components";
+
 import GamesFilter from "../GamesFilter";
 import { useSelector } from "react-redux";
 import { RootState } from "@store/store";
@@ -19,9 +20,8 @@ import {
 } from "./styles";
 import LotteryItem from "./Item";
 import { Link } from "react-router-dom";
-import { getFilterGames } from "@core/assets/utils/requestGetFilterGames";
-import Loading from "@core/components/Loading";
-import Error from "@core/components/Error";
+import { listGames } from "@core/assets/services/Games/ListGames";
+import { listBet } from "@core/assets/services/Bets/ListBet";
 
 const LotteryList = () => {
   const [gamesList, setGamesList] = useState<GamesList[]>([]);
@@ -43,26 +43,20 @@ const LotteryList = () => {
           type: types,
         };
       }
-      try {
-        const response = await makeRequest({
-          url: "/bet/all-bets",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params,
-        });
-        setGamesList(response.data);
-      } catch (error: any) {}
+      const response = await listBet(token, params);
+      if (!!response) {
+        setGamesList(response);
+      }
     },
     [token]
   );
 
   async function fetchData() {
     setIsError(false);
-    try {
-      const response = await getFilterGames();
+    const response = await listGames();
+    if (!!response) {
       setGameFilter(response);
-    } catch (error: any) {
+    } else {
       setIsError(true);
     }
     setIsLoading(false);

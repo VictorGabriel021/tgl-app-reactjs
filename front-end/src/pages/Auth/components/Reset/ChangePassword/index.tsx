@@ -1,16 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { makeRequest } from "@core/assets/utils/request";
 import BtnSumbit from "@core/components/ButtonSubmit";
 import Card from "@core/components/Card";
 import { TextCenter } from "@pages/Auth/styles";
 import { ErrorMessage, Input, Label } from "@pages/Auth/components/styles";
-
-interface IFormInput {
-  password: string;
-  confirmPassword: string;
-}
+import { IFormChangePassword } from "@core/assets/interfaces/AuthForms/interfaces";
+import { changePassword } from "@core/assets/services/Auth/ChangePassword";
 
 type Props = {
   title: string;
@@ -25,21 +21,17 @@ const ChangePassword = ({ title, textRedirect, resetToken }: Props) => {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormChangePassword>();
 
-  const onSubmit = async (dataForm: IFormInput) => {
+  const onSubmit = async (dataForm: IFormChangePassword) => {
     if (dataForm.password === dataForm.confirmPassword) {
-      try {
-        await makeRequest({
-          url: `/reset/${resetToken}`,
-          method: "POST",
-          data: { password: dataForm.password },
-        });
+      const response = await changePassword(dataForm, resetToken);
+      if (!!response) {
         history.push("/");
         toast.success("Senha alterada !", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      } catch (error: any) {}
+      }
     } else {
       setError("password", {
         type: "validate",

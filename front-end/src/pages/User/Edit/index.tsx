@@ -1,16 +1,13 @@
-import { makeRequest } from "@core/assets/utils/request";
+import { IFormUpdateMyUser } from "@core/assets/interfaces/UserForms/interfaces";
+import { updateMyUser } from "@core/assets/services/User/UpdateMyUser";
 import { updateUser } from "@store/authSlice";
 import { RootState } from "@store/store";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Form, ErrorMessage } from "./styles";
-
-interface IFormInput {
-  email: string;
-  name: string;
-}
 
 const UserEdit = () => {
   const { token } = useSelector((state: RootState) => state.auth.token);
@@ -22,21 +19,17 @@ const UserEdit = () => {
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormUpdateMyUser>();
 
-  const editHandler = async (params: IFormInput) => {
-    try {
-      const response = await makeRequest({
-        method: "PUT",
-        url: "/user/update",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params,
+  const editHandler = async (params: IFormUpdateMyUser) => {
+    const response = await updateMyUser(token, params);
+    if (!!response) {
+      dispatch(updateUser(response));
+      toast.success("Usuário alterado com sucesso !", {
+        position: toast.POSITION.TOP_RIGHT,
       });
-      dispatch(updateUser(response.data));
       history.push("/user");
-    } catch (error: any) {}
+    }
   };
 
   useEffect(() => {

@@ -7,37 +7,29 @@ import {
 } from "../styles";
 import Card from "@core/components/Card";
 import { useForm } from "react-hook-form";
-import { makeRequest } from "@core/assets/utils/request";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "@store/authSlice";
 import { AuthCard } from "@core/assets/interfaces/interfaces";
 import BtnSumbit from "@core/components/ButtonSubmit";
-
-interface IFormInput {
-  email: string;
-  password: string;
-}
+import { loginUser } from "@core/assets/services/Auth/LoginUser";
+import { IFormLogin } from "@core/assets/interfaces/AuthForms/interfaces";
 
 const Login = ({ title, textButton, textRedirect }: AuthCard) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormLogin>();
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const onSubmit = async (dataForm: IFormInput) => {
-    try {
-      const response = await makeRequest({
-        url: "/login",
-        method: "POST",
-        data: dataForm,
-      });
-      dispatch(login(response.data));
+  const onSubmit = async (dataForm: IFormLogin) => {
+    const response = await loginUser(dataForm);
+    if (!!response) {
+      dispatch(login(response));
       history.push("/lottery");
-    } catch (error: any) {}
+    }
   };
 
   return (

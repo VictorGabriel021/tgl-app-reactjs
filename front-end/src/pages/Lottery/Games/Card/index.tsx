@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GameFilter } from "@core/assets/interfaces/interfaces";
 import { priceReal } from "@core/assets/utils/price";
-import { makeRequest } from "@core/assets/utils/request";
 import { RootState } from "@store/store";
 import LotteryCardItem from "./Item";
 import {
@@ -15,6 +14,7 @@ import {
   TitleCardSave,
   TotalParagraph,
 } from "./styles";
+import { newBet } from "@core/assets/services/Bets/NewBet";
 
 type Props = {
   gamesList: GameFilter;
@@ -28,20 +28,13 @@ const GamesCard = ({ gamesList }: Props) => {
   const { token } = useSelector((state: RootState) => state.auth.token);
 
   const saveBet = async () => {
-    try {
-      await makeRequest({
-        method: "POST",
-        url: "/bet/new-bet",
-        data: { games: games },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const response = await newBet(token, games);
+    if (!!response) {
       history.push("/lottery");
       toast.success("Apostas cadastradas com sucesso !", {
         position: toast.POSITION.TOP_RIGHT,
       });
-    } catch (error: any) {}
+    }
   };
 
   const saveBetListhandler = () => {

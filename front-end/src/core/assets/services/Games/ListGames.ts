@@ -1,8 +1,8 @@
-import { makeRequest } from "@core/assets/utils/request";
+import { makeRequest } from "../axios.config";
 
-export async function getFilterGames() {
+export const listGames = async () => {
   try {
     const response = await makeRequest({ url: "/cart_games" });
     return response.data;
   } catch (error: any) {}
-}
+};

@@ -76,6 +76,19 @@ export interface UserInfo {
   updated_at: string;
 }
 
+export const defaultValuesUser = {
+  bets: [],
+  created_at: "",
+  email: "",
+  id: 0,
+  is_admin: 0,
+  name: "",
+  picture: "",
+  token: "",
+  token_created_at: "",
+  updated_at: "",
+}
+
 export interface UserBetInfo {
   choosen_numbers: string;
   created_at: string;

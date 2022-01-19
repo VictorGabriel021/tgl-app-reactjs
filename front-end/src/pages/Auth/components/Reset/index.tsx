@@ -1,15 +1,12 @@
 import { Input, Label, TextCenter, ErrorMessage } from "../styles";
 import Card from "@core/components/Card";
 import { useForm } from "react-hook-form";
-import { makeRequest } from "@core/assets/utils/request";
 import { AuthCard } from "@core/assets/interfaces/interfaces";
 import BtnSumbit from "@core/components/ButtonSubmit";
 import { useState } from "react";
 import ChangePassword from "./ChangePassword";
-
-interface IFormInput {
-  email: string;
-}
+import { resetPassword } from "@core/assets/services/Auth/ResetPassword";
+import { IFormReset } from "@core/assets/interfaces/AuthForms/interfaces";
 
 const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
   const [resetToken, setResetToken] = useState("");
@@ -17,17 +14,13 @@ const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormReset>();
 
-  const onSubmit = async (dataForm: IFormInput) => {
-    try {
-      const response = await makeRequest({
-        url: "/reset",
-        method: "POST",
-        data: dataForm,
-      });
-      setResetToken(response.data.token);
-    } catch (error: any) {}
+  const onSubmit = async (dataForm: IFormReset) => {
+    const response = await resetPassword(dataForm);
+    if (!!response) {
+      setResetToken(response.token);
+    }
   };
 
   if (resetToken.length > 0) {

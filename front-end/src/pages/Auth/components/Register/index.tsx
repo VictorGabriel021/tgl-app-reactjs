@@ -1,18 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { makeRequest } from "@core/assets/utils/request";
 import { AuthCard } from "@core/assets/interfaces/interfaces";
 import Card from "@core/components/Card";
 import { login } from "@store/authSlice";
 import BtnSumbit from "@core/components/ButtonSubmit";
 import { ErrorMessage, Input, Label, TextCenter } from "../styles";
-
-interface IFormInput {
-  name: string;
-  email: string;
-  password: string;
-}
+import { IFormRegister } from "@core/assets/interfaces/UserForms/interfaces";
+import { createUser } from "@core/assets/services/User/CreateUser";
 
 const Register = ({ title, textButton, textRedirect }: AuthCard) => {
   const {
@@ -20,20 +15,16 @@ const Register = ({ title, textButton, textRedirect }: AuthCard) => {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormRegister>();
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const onSubmit = async (dataForm: IFormInput) => {
-    try {
-      const response = await makeRequest({
-        url: "/user/create",
-        method: "POST",
-        data: dataForm,
-      });
-      dispatch(login(response.data));
+  const onSubmit = async (dataForm: IFormRegister) => {
+    const response = await createUser(dataForm);
+    if (!!response) {
+      dispatch(login(response));
       history.push("/lottery");
-    } catch (error: any) {
+    } else {
       setError("email", {
         type: "validate",
         message: "Email já existe !",
