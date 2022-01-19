@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { BsTrash } from "react-icons/bs";
-import { priceReal } from "@core/assets/utils/price";
-import RemoveItemModal from "../RemoveItemModal";
+
 import {
   ColorGame,
   IconTrash,
@@ -9,6 +8,10 @@ import {
   TextParagraph,
   TextParagraphBoldMedia,
 } from "@pages/Lottery/styles";
+
+import RemoveItemModal from "../RemoveItemModal";
+
+import { priceReal } from "@core/assets/utils/price";
 
 type Props = {
   id: number;

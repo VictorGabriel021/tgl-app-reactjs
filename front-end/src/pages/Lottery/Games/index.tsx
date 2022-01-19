@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import GamesFilter from "../GamesFilter";
+
 import {
   Container,
   LotteryTitle,
@@ -7,33 +9,34 @@ import {
   LotteryChooiceNumber,
   DescriptionGame,
 } from "./styles";
-import GamesCard from "./Card";
-import { GameFilter, GameInfo } from "@core/assets/interfaces/interfaces";
-import GenerateNumbers from "./Numbers";
-import { useDispatch } from "react-redux";
-import { clearGame, getGameId } from "@store/betSlice";
-import ActionsButtons from "./ActionsButtons";
-import { clearCart } from "@store/cartSlice";
-import Loading from "@core/components/Loading";
-import Error from "@core/components/Error";
+
+import { Loading, Error } from "@core/components";
+
 import { listGames } from "@core/assets/services/Games/ListGames";
+
+import { clearGame, getGameId } from "@store/betSlice";
+import { clearCart } from "@store/cartSlice";
+
+import GamesCard from "./Card";
+import GenerateNumbers from "./Numbers";
+import ActionsButtons from "./ActionsButtons";
+
+import {
+  defaultValuesGameFilter,
+  defaultValuesGameInfo,
+  GameFilter,
+  GameInfo,
+} from "@core/assets/interfaces/Games/interface";
 
 const LotteryGames = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState<number[]>([]);
-  const [selectedGame, setSelectedGame] = useState<GameInfo>({
-    id: 0,
-    type: "",
-    description: "",
-    range: 0,
-    price: 0,
-    max_number: 0,
-    color: "",
-  });
-  const [gamesList, setGamesList] = useState<GameFilter>({
-    min_cart_value: 0,
-    types: [],
-  });
+  const [selectedGame, setSelectedGame] = useState<GameInfo>(
+    defaultValuesGameInfo
+  );
+  const [gamesList, setGamesList] = useState<GameFilter>(
+    defaultValuesGameFilter
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 

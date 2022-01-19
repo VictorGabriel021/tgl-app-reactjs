@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { UserLogin } from "@core/assets/interfaces/interfaces";
+
 import { getAuthData, isAuthenticated } from "@core/assets/utils/auth";
+
+import { UserLogin } from "@core/assets/interfaces/Auth/interfaces";
 
 const userAuthenticated = getAuthData();
 const isAuth = isAuthenticated();

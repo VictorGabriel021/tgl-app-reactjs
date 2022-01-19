@@ -1,8 +1,8 @@
-import { HiOutlineArrowRight } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { logout } from "@store/authSlice";
-import { RootState } from "@store/store";
+
+import { HiOutlineArrowRight } from "react-icons/hi";
+
 import {
   NavContainer,
   NavContent,
@@ -13,6 +13,9 @@ import {
   NavItemLogout,
   NavItemAccount,
 } from "./styles";
+
+import { logout } from "@store/authSlice";
+import { RootState } from "@store/store";
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);

@@ -1,10 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Bet } from "@core/assets/interfaces/interfaces";
+import { Bet, defaultValuesBet } from "@core/assets/interfaces/Bets/interfaces";
 
-const initialStateLogin: Bet = {
-  game_id: 0,
-  numbers: [],
-};
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialStateLogin: Bet = defaultValuesBet;
 
 export const betSlice = createSlice({
   name: "bet",

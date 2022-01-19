@@ -1,30 +1,27 @@
-import { UserInfo } from "@core/assets/interfaces/interfaces";
-import { dateBrazil } from "@core/assets/utils/date";
-import Error from "@core/components/Error";
-import Loading from "@core/components/Loading";
-import { RootState } from "@store/store";
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { Img, Button } from "./styles";
+
+import { Loading, Error } from "@core/components";
+
+import { RootState } from "@store/store";
+
+import { dateBrazil } from "@core/assets/utils/date";
+
 import { myAccount } from "@core/assets/services/User/MyAccount";
+
+import {
+  defaultValuesUser,
+  UserInfo,
+} from "@core/assets/interfaces/User/interface";
 
 const UserDetails = () => {
   const { token } = useSelector((state: RootState) => state.auth.token);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    bets: [],
-    created_at: "",
-    email: "",
-    id: 0,
-    is_admin: 0,
-    name: "",
-    picture: "",
-    token: "",
-    token_created_at: "",
-    updated_at: "",
-  });
+  const [userInfo, setUserInfo] = useState<UserInfo>(defaultValuesUser);
 
   const fetchData = useCallback(async () => {
     const response = await myAccount(token);

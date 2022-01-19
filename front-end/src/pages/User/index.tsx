@@ -1,5 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+
 import PageNotFound from "@core/components/PageNotFound";
+
 import UserDetails from "./Details";
 import UserEdit from "./Edit";
 

@@ -1,7 +1,9 @@
 import React from "react";
-import { TextMain, TextRedirect, CardContainer } from "./styles";
-import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
+
+import { TextMain, TextRedirect, CardContainer } from "./styles";
+
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 
 type Props = {
   children: React.ReactNode;
@@ -11,7 +13,13 @@ type Props = {
   urlRedirect: string;
 };
 
-const Card = ({ children, title, textRedirect, arrowLeft, urlRedirect }: Props) => {
+const Card = ({
+  children,
+  title,
+  textRedirect,
+  arrowLeft,
+  urlRedirect,
+}: Props) => {
   return (
     <>
       <TextMain>{title}</TextMain>

@@ -1,11 +1,8 @@
-import { HiOutlineArrowRight } from "react-icons/hi";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { GameFilter } from "@core/assets/interfaces/interfaces";
-import { priceReal } from "@core/assets/utils/price";
-import { RootState } from "@store/store";
-import LotteryCardItem from "./Item";
+import { HiOutlineArrowRight } from "react-icons/hi";
+
 import {
   CardCart,
   CardSave,
@@ -14,7 +11,17 @@ import {
   TitleCardSave,
   TotalParagraph,
 } from "./styles";
+
+import LotteryCardItem from "./Item";
+
 import { newBet } from "@core/assets/services/Bets/NewBet";
+
+import { GameFilter } from "@core/assets/interfaces/Games/interface";
+import { Bet } from "@core/assets/interfaces/Bets/interfaces";
+
+import { priceReal } from "@core/assets/utils/price";
+
+import { RootState } from "@store/store";
 
 type Props = {
   gamesList: GameFilter;
@@ -62,7 +69,7 @@ const GamesCard = ({ gamesList }: Props) => {
           )}
           {games.length > 0 &&
             gamesList.types.length > 0 &&
-            games.map((item) => {
+            games.map((item: Bet) => {
               const gameInfo = gamesList.types.find(
                 (game) => game.id === item.game_id
               );

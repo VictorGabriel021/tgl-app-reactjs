@@ -1,13 +1,17 @@
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { AuthCard } from "@core/assets/interfaces/interfaces";
-import Card from "@core/components/Card";
-import { login } from "@store/authSlice";
-import BtnSumbit from "@core/components/ButtonSubmit";
+
 import { ErrorMessage, Input, Label, TextCenter } from "../styles";
+
+import { BtnSumbit, Card } from "@core/components";
+
 import { IFormRegister } from "@core/assets/interfaces/UserForms/interfaces";
+import { AuthCard } from "@core/assets/interfaces/AuthCard/interfaces";
+
 import { createUser } from "@core/assets/services/User/CreateUser";
+
+import { login } from "@store/authSlice";
 
 const Register = ({ title, textButton, textRedirect }: AuthCard) => {
   const {

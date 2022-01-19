@@ -1,12 +1,16 @@
-import { Input, Label, TextCenter, ErrorMessage } from "../styles";
-import Card from "@core/components/Card";
-import { useForm } from "react-hook-form";
-import { AuthCard } from "@core/assets/interfaces/interfaces";
-import BtnSumbit from "@core/components/ButtonSubmit";
 import { useState } from "react";
-import ChangePassword from "./ChangePassword";
-import { resetPassword } from "@core/assets/services/Auth/ResetPassword";
+import { useForm } from "react-hook-form";
+
+import { Input, Label, TextCenter, ErrorMessage } from "../styles";
+
+import { BtnSumbit, Card } from "@core/components";
+
 import { IFormReset } from "@core/assets/interfaces/AuthForms/interfaces";
+import { AuthCard } from "@core/assets/interfaces/AuthCard/interfaces";
+
+import { resetPassword } from "@core/assets/services/Auth/ResetPassword";
+
+import ChangePassword from "./ChangePassword";
 
 const Reset = ({ title, textButton, textRedirect }: AuthCard) => {
   const [resetToken, setResetToken] = useState("");

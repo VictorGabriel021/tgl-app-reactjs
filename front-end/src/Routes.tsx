@@ -1,12 +1,12 @@
-import User from "@pages/User";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Footer from "@core/components/Footer";
-import Navbar from "@core/components/Navbar";
-import PageNotFound from "@core/components/PageNotFound";
-import PrivateRoute from "@core/components/Routes/PrivateRoute";
+
+import { Navbar, PrivateRoute, PageNotFound, Footer } from "@core/components";
+
+import User from "@pages/User";
 import Auth from "@pages/Auth";
 import Lottery from "@pages/Lottery";
+
 import { RootState } from "@store/store";
 
 const Routes = () => {

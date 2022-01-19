@@ -1,3 +1,7 @@
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+
 import {
   TextParagrath,
   Input,
@@ -5,15 +9,15 @@ import {
   TextCenter,
   ErrorMessage,
 } from "../styles";
-import Card from "@core/components/Card";
-import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "@store/authSlice";
-import { AuthCard } from "@core/assets/interfaces/interfaces";
-import BtnSumbit from "@core/components/ButtonSubmit";
+
+import { BtnSumbit, Card } from "@core/components";
+
 import { loginUser } from "@core/assets/services/Auth/LoginUser";
+
 import { IFormLogin } from "@core/assets/interfaces/AuthForms/interfaces";
+import { AuthCard } from "@core/assets/interfaces/AuthCard/interfaces";
+
+import { login } from "@store/authSlice";
 
 const Login = ({ title, textButton, textRedirect }: AuthCard) => {
   const {

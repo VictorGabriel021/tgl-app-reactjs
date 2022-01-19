@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, Redirect, Route, Switch, useHistory } from "react-router-dom";
+
 import {
   Container,
   Title,
@@ -7,13 +10,12 @@ import {
   TextCenter,
   Content,
 } from "./styles";
-import Login from "@pages/Auth/components/Login";
-import Register from "@pages/Auth/components/Register";
-import Reset from "@pages/Auth/components/Reset";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
+import { PageNotFound } from "@core/components";
+
+import { Login, Reset, Register } from "@pages/Auth/components";
+
 import { logout } from "@store/authSlice";
-import PageNotFound from "@core/components/PageNotFound";
 
 const Auth = () => {
   const history = useHistory();

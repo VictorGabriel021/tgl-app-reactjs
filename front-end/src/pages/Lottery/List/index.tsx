@@ -1,15 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
-import {
-  GameFilter,
-  GameInfo,
-  GamesList,
-} from "@core/assets/interfaces/interfaces";
-
-import { BtnSumbit, Loading, Error } from "@core/components";
-
-import GamesFilter from "../GamesFilter";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "@store/store";
+
 import {
   Container,
   Content,
@@ -18,17 +10,29 @@ import {
   Filters,
   FiltersMain,
 } from "./styles";
+
 import LotteryItem from "./Item";
-import { Link } from "react-router-dom";
+import GamesFilter from "../GamesFilter";
+
+import { BtnSumbit, Loading, Error } from "@core/components";
+
 import { listGames } from "@core/assets/services/Games/ListGames";
 import { listBet } from "@core/assets/services/Bets/ListBet";
 
+import {
+  defaultValuesGameFilter,
+  GameFilter,
+  GameInfo,
+  GamesList,
+} from "@core/assets/interfaces/Games/interface";
+
+import { RootState } from "@store/store";
+
 const LotteryList = () => {
   const [gamesList, setGamesList] = useState<GamesList[]>([]);
-  const [gameFilter, setGameFilter] = useState<GameFilter>({
-    min_cart_value: 0,
-    types: [],
-  });
+  const [gameFilter, setGameFilter] = useState<GameFilter>(
+    defaultValuesGameFilter
+  );
   const [params, setParams] = useState<string[]>([]);
   const [filter, setFilter] = useState<number[]>([]);
   const { token } = useSelector((state: RootState) => state.auth.token);

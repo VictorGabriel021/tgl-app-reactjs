@@ -1,4 +1,4 @@
-import { UserLogin } from "@core/assets/interfaces/interfaces";
+import { UserLogin } from "../interfaces/Auth/interfaces";
 
 export const getAuthData = () => {
   const userAuth = localStorage.getItem("login") || "{}";

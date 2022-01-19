@@ -1,9 +1,13 @@
-import Modal from "@core/components/Modal";
-import { removeFromCart } from "@store/cartSlice";
 import { useDispatch } from "react-redux";
+
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineWarning } from "react-icons/ai";
+
 import { CloseIcon, WarningIcon, Button } from "./styles";
+
+import Modal from "@core/components/Modal";
+
+import { removeFromCart } from "@store/cartSlice";
 
 type Props = {
   onClose: () => void;

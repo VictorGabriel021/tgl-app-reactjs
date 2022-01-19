@@ -1,13 +1,18 @@
-import { BsCart3 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { Bet, GameInfo } from "@core/assets/interfaces/interfaces";
+import { toast } from "react-toastify";
+import { BsCart3 } from "react-icons/bs";
+
+import { BtnAction, BtnAddToCart, BtnContainer } from "./styles";
+
 import { sortArray } from "@core/assets/utils/array";
 import { isEqualBet } from "@core/assets/utils/bet";
+
+import { GameInfo } from "@core/assets/interfaces/Games/interface";
+import { Bet } from "@core/assets/interfaces/Bets/interfaces";
+
 import { clearGame, completeGame } from "@store/betSlice";
 import { addToCart } from "@store/cartSlice";
 import { RootState } from "@store/store";
-import { BtnAction, BtnAddToCart, BtnContainer } from "./styles";
-import { toast } from "react-toastify";
 
 type Props = {
   selectedGame: GameInfo;

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import { Backdrop, Container, Content } from "./styles";
 
 type Props = {

@@ -1,4 +1,4 @@
-import { GameInfo } from "@core/assets/interfaces/interfaces";
+import { GameInfo } from "@core/assets/interfaces/Games/interface";
 import { ButtonGames } from "./styles";
 
 type Props = {

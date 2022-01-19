@@ -1,13 +1,17 @@
-import { IFormUpdateMyUser } from "@core/assets/interfaces/UserForms/interfaces";
-import { updateMyUser } from "@core/assets/services/User/UpdateMyUser";
-import { updateUser } from "@store/authSlice";
-import { RootState } from "@store/store";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import { Form, ErrorMessage } from "./styles";
+
+import { IFormUpdateMyUser } from "@core/assets/interfaces/UserForms/interfaces";
+
+import { updateMyUser } from "@core/assets/services/User/UpdateMyUser";
+
+import { updateUser } from "@store/authSlice";
+import { RootState } from "@store/store";
 
 const UserEdit = () => {
   const { token } = useSelector((state: RootState) => state.auth.token);

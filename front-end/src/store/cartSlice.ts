@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BetList } from "@core/assets/interfaces/interfaces";
 
-const initialStateLogin: BetList = {
-  games: [],
-  totalCart: 0,
-};
+import {
+  BetList,
+  defaultValuesBetList,
+} from "@core/assets/interfaces/Bets/interfaces";
+
+const initialStateLogin: BetList = defaultValuesBetList;
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -15,7 +16,9 @@ export const cartSlice = createSlice({
       state.totalCart += action.payload.selectedGame.price;
     },
     removeFromCart: (state, action) => {
-      const index = state.games.findIndex(item => item.id === action.payload.id);
+      const index = state.games.findIndex(
+        (item) => item.id === action.payload.id
+      );
       state.games.splice(index, 1);
       state.totalCart -= action.payload.price;
     },

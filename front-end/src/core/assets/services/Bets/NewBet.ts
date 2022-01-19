@@ -1,4 +1,4 @@
-import { Bet } from "@core/assets/interfaces/interfaces";
+import { Bet } from "@core/assets/interfaces/Bets/interfaces";
 import { makeRequest } from "../axios.config";
 
 export const newBet = async (token: string, games: Bet[]) => {

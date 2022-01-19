@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import { ChooiceNumber } from "./styles";
+
 import { addNumberInList, removeNumberFromList } from "@store/betSlice";
 import { RootState } from "@store/store";
-import { toast } from "react-toastify";
 
 type Props = {
   numbers: number;

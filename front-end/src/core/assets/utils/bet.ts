@@ -1,4 +1,4 @@
-import { Bet } from "@core/assets/interfaces/interfaces";
+import { Bet } from "../interfaces/Bets/interfaces";
 
 export const isEqualBet = (betList: Bet[], betItem: Bet) => {
   let selectedNumberGame = [...betItem.numbers];

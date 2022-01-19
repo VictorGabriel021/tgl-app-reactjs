@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import BtnSumbit from "@core/components/ButtonSubmit";
-import Card from "@core/components/Card";
+
 import { TextCenter } from "@pages/Auth/styles";
 import { ErrorMessage, Input, Label } from "@pages/Auth/components/styles";
+
+import { BtnSumbit, Card } from "@core/components";
+
 import { IFormChangePassword } from "@core/assets/interfaces/AuthForms/interfaces";
+
 import { changePassword } from "@core/assets/services/Auth/ChangePassword";
 
 type Props = {
