@@ -53,6 +53,7 @@ const LotteryList = () => {
 
   async function fetchData() {
     setIsError(false);
+    setIsLoading(true);
     const response = await listGames();
     if (!!response) {
       setGameFilter(response);
@@ -117,6 +118,11 @@ const LotteryList = () => {
     return <Error />;
   }
 
+  let gameListContent = <p>Não existem apostas registradas para esse jogo!</p>;
+  if (gamesList.length === 0 && params.length === 0) {
+    gameListContent = <p>Não existem apostas para serem filtradas!</p>;
+  }
+
   return (
     <Container>
       {gameFilter && gameFilter.min_cart_value > 0 && (
@@ -124,7 +130,12 @@ const LotteryList = () => {
           <div>
             <FiltersMain>
               <Subtitle>RECENT GAMES</Subtitle>
-              <BtnSumbit className="fs-5 p-0 d-sm-none" textButton="New Bet" />
+              <Link to={"/lottery/games"}>
+                <BtnSumbit
+                  className="fs-5 p-0 d-sm-none"
+                  textButton="New Bet"
+                />
+              </Link>
               <Filters>
                 <TextFilter>Filters</TextFilter>
                 <GamesFilter
@@ -140,21 +151,26 @@ const LotteryList = () => {
                 />
               </Link>
             </FiltersMain>
-            {gamesList.map((game) => {
-              const gameColor = gameFilter.types.find(
-                (item) => item.id === game.game_id
-              )!.color;
-              return (
-                <LotteryItem
-                  key={game.id}
-                  choosen_numbers={game.choosen_numbers}
-                  gameDate={game.created_at}
-                  gameType={game.type.type}
-                  price={game.price}
-                  color={gameColor}
-                />
-              );
-            })}
+            {gamesList.length === 0 && (
+              <div className="alert alert-danger m-5">{gameListContent}</div>
+            )}
+            ;
+            {gamesList.length > 0 &&
+              gamesList.map((game) => {
+                const gameColor = gameFilter.types.find(
+                  (item) => item.id === game.game_id
+                )!.color;
+                return (
+                  <LotteryItem
+                    key={game.id}
+                    choosen_numbers={game.choosen_numbers}
+                    gameDate={game.created_at}
+                    gameType={game.type.type}
+                    price={game.price}
+                    color={gameColor}
+                  />
+                );
+              })}
           </div>
         </Content>
       )}
