@@ -15,7 +15,8 @@ export const cartSlice = createSlice({
       state.totalCart += action.payload.selectedGame.price;
     },
     removeFromCart: (state, action) => {
-      state.games.splice(action.payload.id, 1);
+      const index = state.games.findIndex(item => item.id === action.payload.id);
+      state.games.splice(index, 1);
       state.totalCart -= action.payload.price;
     },
     clearCart: (state) => {

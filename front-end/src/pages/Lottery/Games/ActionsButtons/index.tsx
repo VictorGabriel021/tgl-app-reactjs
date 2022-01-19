@@ -33,6 +33,7 @@ const ActionsButtons = ({ selectedGame }: Props) => {
   const addToCartHandler = () => {
     const maxNumbers = selectedGame.max_number;
     const newBetItem: Bet = {
+      id: Math.random(),
       game_id: betItem.game_id,
       numbers: sortArray([...betItem.numbers]),
     };

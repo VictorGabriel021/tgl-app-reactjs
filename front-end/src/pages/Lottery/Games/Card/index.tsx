@@ -66,14 +66,14 @@ const GamesCard = ({ gamesList }: Props) => {
           )}
           {games.length > 0 &&
             gamesList.types.length > 0 &&
-            games.map((item, index) => {
+            games.map((item) => {
               const gameInfo = gamesList.types.find(
                 (game) => game.id === item.game_id
               );
               return (
                 <LotteryCardItem
-                  key={index}
-                  id={index}
+                  key={item.id as number}
+                  id={item.id as number}
                   choosen_numbers={item.numbers}
                   gameType={gameInfo!.type}
                   price={gameInfo!.price}

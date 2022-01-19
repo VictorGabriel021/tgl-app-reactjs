@@ -33,6 +33,7 @@ export interface GamesList {
 }
 
 export interface Bet {
+  id?: number;
   game_id: number;
   numbers: number[];
 }

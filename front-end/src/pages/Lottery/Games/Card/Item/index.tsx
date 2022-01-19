@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { BsTrash } from "react-icons/bs";
-import { useDispatch } from "react-redux";
 import { priceReal } from "@core/assets/utils/price";
-import { removeFromCart } from "@store/cartSlice";
+import RemoveItemModal from "../RemoveItemModal";
 import {
   ColorGame,
   IconTrash,
@@ -25,17 +25,23 @@ const LotteryCardItem = ({
   price,
   color,
 }: Props) => {
-  const dispatch = useDispatch();
+  const [cartIsShown, setCartIsShown] = useState(false);
   const priceInReal = priceReal(price);
   const newChoosen_numbers = choosen_numbers.join();
 
   const removeToCartHandler = () => {
-    if (window.confirm("Você realmente deseja excluir esta aposta ?"))
-      dispatch(removeFromCart({ id, price }));
+    setCartIsShown(true);
+  };
+
+  const hideCartHandler = () => {
+    setCartIsShown(false);
   };
 
   return (
     <div className="d-flex align-items-center">
+      {cartIsShown && (
+        <RemoveItemModal id={id} price={price} onClose={hideCartHandler} />
+      )}
       <IconTrash>
         <BsTrash onClick={removeToCartHandler} />
       </IconTrash>
