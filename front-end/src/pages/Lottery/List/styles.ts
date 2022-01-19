@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin: 50px auto;
+  padding: 50px 30px;
+  margin: 0 auto;
   max-width: 1500px;
+
+  @media (max-width: 500px) {
+    padding: 50px 0;
+  }
 `;
 
 export const Content = styled.div`
@@ -11,7 +16,7 @@ export const Content = styled.div`
   justify-content: space-around;
 
   @media (min-width: 2560px) {
-    justify-content: space-between;
+    justify-content: center;
   }
 `;
 
@@ -41,7 +46,7 @@ export const FiltersMain = styled(Filters)`
   a {
     text-decoration: none;
   }
-  
+
   @media (max-width: 850px) {
     padding: 10px 15px 0 15px;
   }
