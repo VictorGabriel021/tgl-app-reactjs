@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChooiceNumber } from "./styles";
 import { addNumberInList, removeNumberFromList } from "@store/betSlice";
 import { RootState } from "@store/store";
+import { toast } from "react-toastify";
 
 type Props = {
   numbers: number;
@@ -24,7 +25,9 @@ const GenerateNumbers = ({ numbers, maxNumbers }: Props) => {
       if (maxNumbers > numbersGame.length) {
         dispatch(addNumberInList(item));
       } else {
-        window.alert(`Você já selecionou ${maxNumbers} números!`);
+        toast.warning(`Você já selecionou ${maxNumbers} números!`, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       }
     } else {
       dispatch(removeNumberFromList(item));

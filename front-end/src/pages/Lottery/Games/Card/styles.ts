@@ -37,7 +37,8 @@ export const TitleCardSave = styled.p`
 `;
 
 export const CardScroll = styled.div`
-  height: 400px;
+  min-height: 150px;
+  max-height: 300px;
   overflow-x: hidden;
   overflow-y: auto;
   margin-bottom: 20px;

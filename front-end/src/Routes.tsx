@@ -11,26 +11,27 @@ import { RootState } from "@store/store";
 
 const Routes = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-
   return (
     <BrowserRouter>
       <Navbar />
-      <Switch>
-        <Redirect from="/" to="/auth/login" exact />
-        <Route path="/auth">
-          {!isAuthenticated && <Auth />}
-          {isAuthenticated && <Redirect to="/lottery" />}
-        </Route>
-        <PrivateRoute path="/user">
-          <User />
-        </PrivateRoute>
-        <PrivateRoute path="/lottery">
-          <Lottery />
-        </PrivateRoute>
-        <Route path="*">
-          <PageNotFound />
-        </Route>
-      </Switch>
+      <div className="content">
+        <Switch>
+          <Redirect from="/" to="/auth/login" exact />
+          <Route path="/auth">
+            {!isAuthenticated && <Auth />}
+            {isAuthenticated && <Redirect to="/lottery" />}
+          </Route>
+          <PrivateRoute path="/user">
+            <User />
+          </PrivateRoute>
+          <PrivateRoute path="/lottery">
+            <Lottery />
+          </PrivateRoute>
+          <Route path="*">
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </div>
       <Footer />
     </BrowserRouter>
   );

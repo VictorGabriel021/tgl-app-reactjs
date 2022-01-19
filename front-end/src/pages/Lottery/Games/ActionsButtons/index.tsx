@@ -7,6 +7,7 @@ import { clearGame, completeGame } from "@store/betSlice";
 import { addToCart } from "@store/cartSlice";
 import { RootState } from "@store/store";
 import { BtnAction, BtnAddToCart, BtnContainer } from "./styles";
+import { toast } from "react-toastify";
 
 type Props = {
   selectedGame: GameInfo;
@@ -40,11 +41,15 @@ const ActionsButtons = ({ selectedGame }: Props) => {
     const isEqual = isEqualBet(betList, newBetItem);
 
     if (isEqual) {
-      window.alert("Não é possível adicionar o mesmo jogo de loteria");
+      toast.warning("Não é possível adicionar o mesmo jogo de loteria", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } else if (newBetItem.numbers.length < maxNumbers) {
       let num: string | number = maxNumbers - newBetItem.numbers.length;
       num = num === 1 ? num + " número" : num + " números";
-      window.alert(`É necessário selecionar mais ${num}`);
+      toast.warning(`É necessário selecionar mais ${num}`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } else {
       dispatch(addToCart({ betItem: newBetItem, selectedGame }));
       clearGameHandler();

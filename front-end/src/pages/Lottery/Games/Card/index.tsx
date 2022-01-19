@@ -41,8 +41,11 @@ const GamesCard = ({ gamesList }: Props) => {
     if (totalCart >= gamesList.min_cart_value) {
       saveBet();
     } else {
-      window.alert(
-        `O valor mínimo para apostar é ${gamesList.min_cart_value} reais !`
+      toast.warning(
+        `O valor mínimo para apostar é ${gamesList.min_cart_value} reais !`,
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
       );
     }
   };

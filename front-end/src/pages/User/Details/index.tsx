@@ -62,7 +62,7 @@ const UserDetails = () => {
       <p>Quantidade de apostas realizadas: {userInfo.bets.length}</p>
       <p>Data de cadastro: {dateBrazil(new Date(userInfo.created_at))}</p>
       <Link to="/user/edit">
-        <Button className="btn btn-primary">Editar</Button>
+        <Button className="btn btn-primary mb-5">Editar</Button>
       </Link>
     </div>
   );
