@@ -42,38 +42,40 @@ const UserEdit = () => {
   }, [email, name, setValue]);
 
   return (
-    <Form onSubmit={handleSubmit(editHandler)}>
-      <div className="d-flex justify-content-between">
-        <h2>Editar Usuário</h2>
-        <Link to="./">
-          <p>Voltar</p>
-        </Link>
-      </div>
-      <label className="mt-3">Name *</label>
-      {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-      <input
-        className="form-control"
-        type="text"
-        {...register("name", {
-          required: "Este campo é obrigatório",
-          minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },
-        })}
-      />
-      <label className="mt-3">Email *</label>
-      {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-      <input
-        className="form-control"
-        type="email"
-        {...register("email", {
-          required: "Este campo é obrigatório",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "Email inválido",
-          },
-        })}
-      />
-      <button className="btn btn-primary mt-3 w-100">Editar</button>
-    </Form>
+    <div className="d-flex justify-content-center">
+      <Form onSubmit={handleSubmit(editHandler)}>
+        <div className="d-flex justify-content-between">
+          <h2>Editar Usuário</h2>
+          <Link to="./">
+            <p>Voltar</p>
+          </Link>
+        </div>
+        <label className="mt-3">Name *</label>
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+        <input
+          className="form-control"
+          type="text"
+          {...register("name", {
+            required: "Este campo é obrigatório",
+            minLength: { value: 4, message: "Deve ter no mínimo 4 caracteres" },
+          })}
+        />
+        <label className="mt-3">Email *</label>
+        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        <input
+          className="form-control"
+          type="email"
+          {...register("email", {
+            required: "Este campo é obrigatório",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Email inválido",
+            },
+          })}
+        />
+        <button className="btn btn-primary mt-3 w-100">Editar</button>
+      </Form>
+    </div>
   );
 };
 
