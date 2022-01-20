@@ -3,9 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import { Navbar, PrivateRoute, PageNotFound, Footer } from "@core/components";
 
-import User from "@pages/User";
-import Auth from "@pages/Auth";
-import Lottery from "@pages/Lottery";
+import { User, Auth, Lottery } from "@pages/index";
 
 import { RootState } from "@store/store";
 
