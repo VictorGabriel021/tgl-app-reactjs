@@ -42,7 +42,7 @@ describe("Auth", () => {
     cy.get(".sc-hBUSln").click();
   });
 
-  it("Deve poder recuperar a senha", () => {
+  it.skip("Deve poder recuperar a senha", () => {
     cy.visit("http://localhost:3000");
     cy.get(".sc-bYoBSM > a").click();
 
@@ -71,6 +71,28 @@ describe("Auth", () => {
       cy.log(xhr.response.body);
       expect(xhr.status).be.eq(200);
       expect(xhr.request.body.password).be.not.null;
+    });
+  });
+
+  it.skip("Deve criar uma aposta da Mega-Sena de forma aleatória", () => {
+    cy.login();
+    cy.visit("http://localhost:3000/lottery/games");
+    cy.get(".bQpMQD").click();
+
+    for (let i = 0; i < 7; i++) {
+      cy.get(".sc-eJwWfJ > div > :nth-child(1)")
+        .should("be.visible")
+        .click({ force: true });
+      cy.get(".sc-ehCJOs").should("be.visible").click({ force: true });
+    }
+
+    cy.route("GET", "**/bet/all-bets").as("listBetsUser");
+
+    cy.get(".sc-efQSVx").click();
+
+    cy.wait("@listBetsUser").then((xhr) => {
+      cy.log(xhr.response.body);
+      expect(xhr.status).be.eq(200);
     });
   });
 });
