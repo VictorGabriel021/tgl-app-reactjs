@@ -30,7 +30,7 @@ Cypress.Commands.add("createUser", () => {
     url: "http://127.0.0.1:3333/user/create",
     body: {
       name: "Victor Gabriel",
-      email: "usera7@gmail.com",
+      email: "felipeao12@gmail.com",
       password: "1234",
     },
   }).then((response) => {
