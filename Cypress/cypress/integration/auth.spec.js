@@ -38,10 +38,10 @@ describe("Auth", () => {
       cy.get(".sc-ikJyIC").should("exist");
     });
 
-    it("Não Deve poder realizar um login no sistema", () => {
+    it("Não Deve poder realizar um login no sistema passando informações que não estejam cadastradas", () => {
       cy.visit("http://localhost:3000/auth/login");
       cy.get('[type="email"]').type("emailinvalido@gmail.com");
-      cy.get('[type="password"]').type("1234abc");
+      cy.get('[type="password"]').type("senhainvalida");
 
       cy.route("POST", "**/login").as("loginUser");
 
@@ -131,15 +131,7 @@ describe("Auth", () => {
 
       cy.get(".sc-ezbkAF").type(Cypress.env("createdUser").user.email);
 
-      cy.route("POST", "**/reset").as("resetUser");
-
       cy.get(".sc-bdvvtL").click();
-
-      cy.wait("@resetUser").then((xhr) => {
-        cy.log(xhr.response.body);
-        expect(xhr.status).be.eq(200);
-        expect(xhr.response.body.email).be.not.null;
-      });
 
       cy.get('[name="password"]').type("123");
       cy.get('[name="confirmPassword"]').type("1234");
@@ -157,15 +149,7 @@ describe("Auth", () => {
 
       cy.get(".sc-ezbkAF").type(Cypress.env("createdUser").user.email);
 
-      cy.route("POST", "**/reset").as("resetUser");
-
       cy.get(".sc-bdvvtL").click();
-
-      cy.wait("@resetUser").then((xhr) => {
-        cy.log(xhr.response.body);
-        expect(xhr.status).be.eq(200);
-        expect(xhr.response.body.email).be.not.null;
-      });
 
       cy.get('[name="password"]').type("1234");
       cy.get('[name="confirmPassword"]').type("123");
@@ -183,15 +167,7 @@ describe("Auth", () => {
 
       cy.get(".sc-ezbkAF").type(Cypress.env("createdUser").user.email);
 
-      cy.route("POST", "**/reset").as("resetUser");
-
       cy.get(".sc-bdvvtL").click();
-
-      cy.wait("@resetUser").then((xhr) => {
-        cy.log(xhr.response.body);
-        expect(xhr.status).be.eq(200);
-        expect(xhr.response.body.email).be.not.null;
-      });
 
       cy.get('[name="password"]').type("1234");
       cy.get('[name="confirmPassword"]').type("12345");

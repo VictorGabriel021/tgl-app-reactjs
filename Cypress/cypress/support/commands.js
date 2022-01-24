@@ -30,7 +30,7 @@ Cypress.Commands.add("createUser", () => {
     url: "http://127.0.0.1:3333/user/create",
     body: {
       name: "Victor Gabriel",
-      email: "felipeao12@gmail.com",
+      email: "felipe010@gmail.com",
       password: "1234",
     },
   }).then((response) => {
@@ -50,3 +50,57 @@ Cypress.Commands.add("login", () => {
     },
   });
 });
+
+Cypress.Commands.add("selectFilterBetList", (gameSelected, gameBtn) => {
+  cy.login();
+  cy.visit("http://localhost:3000");
+
+  cy.route("GET", `**/bet/all-bets?type[]=${gameSelected}`).as(
+    "getBetFiltered"
+  );
+
+  cy.get(gameBtn).click();
+
+  cy.wait("@getBetFiltered").then((xhr) => {
+    cy.log(xhr.response.body);
+    expect(xhr.status).to.eq(200);
+  });
+});
+
+Cypress.Commands.add("selectFilterBetListEmpty", (gameSelected, gameBtn) => {
+  cy.login();
+  cy.visit("http://localhost:3000");
+
+  cy.route("GET", `**/bet/all-bets?type[]=${gameSelected}`).as(
+    "getBetFiltered"
+  );
+
+  cy.get(gameBtn).click();
+
+  cy.wait("@getBetFiltered").then((xhr) => {
+    cy.log(xhr.response.body);
+    expect(xhr.status).to.eq(200);
+
+    if (xhr.response.body.length === 0) {
+      cy.get(".alert > p").should("exist");
+    }
+  });
+});
+
+Cypress.Commands.add(
+  "selectFilterBetGame",
+  (gameSelected, gameBtn, expected) => {
+    cy.login();
+    cy.get(":nth-child(1) > .sc-bqiRlB > a").click();
+
+    cy.get(":nth-child(4) > .sc-bdvvtL").click();
+
+    cy.get(gameSelected).click();
+
+    cy.get(gameBtn)
+      .invoke("text")
+      .then(($value) => {
+        expect($value).be.eq(expected);
+      });
+  }
+);
