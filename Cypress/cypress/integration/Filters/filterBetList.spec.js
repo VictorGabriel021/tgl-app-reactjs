@@ -23,8 +23,6 @@ describe("Filter Bet List", () => {
 
   it("Deve listar todos os jogos se nenhum filtro for selecionado", () => {
     cy.login();
-    cy.visit("http://localhost:3000");
-
     cy.route("GET", "**/bet/all-bets").as("getBet");
 
     cy.wait("@getBet").then((xhr) => {
@@ -35,8 +33,6 @@ describe("Filter Bet List", () => {
 
   it("Não deve listar os jogos se não tiver nenhum jogo cadastrado", () => {
     cy.login();
-    cy.visit("http://localhost:3000");
-
     cy.route("GET", "**/bet/all-bets").as("getBet");
 
     cy.wait("@getBet").then((xhr) => {

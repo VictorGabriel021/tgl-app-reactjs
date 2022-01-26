@@ -24,24 +24,19 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("createUser", () => {
-  cy.request({
-    method: "POST",
-    url: "http://127.0.0.1:3333/user/create",
-    body: {
-      name: "Victor Gabriel",
-      email: "felipe1@gmail.com",
-      password: "1234",
+Cypress.Commands.add("createUser", (userData) => {
+  cy.visit("http://localhost:3000", {
+    onBeforeLoad: (browser) => {
+      browser.localStorage.setItem(
+        "login",
+        JSON.stringify(Cypress.env("createdUser", userData))
+      );
     },
-  }).then((response) => {
-    expect(response.body.user).is.not.null;
-    expect(response.body.token).is.not.null;
-    Cypress.env("createdUser", response.body);
   });
 });
 
 Cypress.Commands.add("login", () => {
-  cy.visit("http://localhost:3000/user/details", {
+  cy.visit("http://localhost:3000", {
     onBeforeLoad: (browser) => {
       browser.localStorage.setItem(
         "login",
